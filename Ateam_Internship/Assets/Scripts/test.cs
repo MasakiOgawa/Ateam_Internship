@@ -18,13 +18,13 @@ public class test : MonoBehaviour
 	private Sprite tex4;
 
 	private Sprite tex00;
-
+	
 	// Use this for initialization
 	void Start()
 	{
 		color = new Color(1, 0.5f, 1, 1);
 		Screen.SetResolution(360, 640, Screen.fullScreen);
-
+		
 		tex00 = tex1;
 	}
 

@@ -7,6 +7,7 @@
 //{
 
 //    private LineRenderer lineRenderer;
+//    public 
 
 
 //    //削除するボールのリスト
@@ -19,6 +20,7 @@
 
 //        // 線の描画を有効にする
 //        lineRenderer.enabled = true;
+
 //        lineRenderer.sortingLayerName = "line";
 
 //        // 頂点数
@@ -37,7 +39,8 @@
 //    // Update is called once per frame
 //    void Update()
 //    {
-      
-
+//        lineRenderer.SetPosition(0, Vector3.zero);
+//        lineRenderer.SetPosition(1, new Vector3(1f, -11f, -1f));
+//        //lineRenderer.SetPosition(2, new GameObject );
 //    }
 //}

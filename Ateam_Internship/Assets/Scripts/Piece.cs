@@ -8,18 +8,25 @@ public class Piece : MonoBehaviour
     public GameObject piecePrefab;
     public Sprite[] pieceSprites;
 
+    private LineRenderer lineRenderer;
+    private GameObject lineObj;
     private GameObject startPiece;      // 最初にドラッグしたピース
     private GameObject endPiece;        // 最後にドラッグしたピース
     private string currentName;         // 名前判定用のstring変数
     private int nCnt;                   // 塗った回数
-    private int nRemoveCnt;
+   
 
-    //削除するボールのリスト
+    //削除するピースのリスト
     List<GameObject> removablePieceList = new List<GameObject>();
 
     // Use this for initialization
     void Start()
     {
+        lineRenderer = GetComponent<LineRenderer>();
+
+        lineRenderer.startWidth = 0.1f;
+        lineRenderer.endWidth = 0.1f;
+
         StartCoroutine(SetPiece(39));
 
         nCnt = 0;
@@ -82,8 +89,8 @@ public class Piece : MonoBehaviour
         {
             GameObject hitObj = hit.collider.gameObject;
 
-            //同じ名前のブロックをクリック＆最後とは別オブジェクトである時
-            if (endPiece != hitObj)     //hitObj.name == currentName && 
+            // 最後とは別オブジェクトである時
+            if (startPiece != hitObj && endPiece != hitObj)     //hitObj.name == currentName && 
             {
                 //２つのオブジェクトの距離を取得
                 float fDistance = Vector2.Distance(hitObj.transform.position, endPiece.transform.position);
@@ -94,6 +101,15 @@ public class Piece : MonoBehaviour
                     endPiece = hitObj;
 
                     PushToList(hitObj);
+
+                    // 線を引く
+                    lineRenderer.positionCount = removablePieceList.Count;
+
+                    for (int i = 0; i < removablePieceList.Count; i++)
+                    {
+                       GameObject obj = removablePieceList[i];
+                       lineRenderer.SetPosition(i, obj.transform.position);
+                    }
                 }
             }
         }
@@ -104,11 +120,13 @@ public class Piece : MonoBehaviour
     {
         int nRemoveCnt = removablePieceList.Count;
 
-        if (nRemoveCnt >= 3 && nRemoveCnt <= 8)
+        if (nRemoveCnt >= 2 && nRemoveCnt <= 8)
         {
             for (int i = 0; i < nRemoveCnt; i++)
             {
                 ChangeColor(removablePieceList[i], new Color(0.5f, 0.5f, 1.0f, 0.5f));
+
+                lineRenderer.positionCount = 0;
             }
 
             nCnt++;
@@ -119,6 +137,8 @@ public class Piece : MonoBehaviour
             for (int i = 0; i < nRemoveCnt; i++)
             {
                 ChangeColor(removablePieceList[i], new Color(1.0f, 1.0f, 1.0f, 1.0f));
+
+                lineRenderer.positionCount = 0;
             }
         }
 
@@ -126,9 +146,7 @@ public class Piece : MonoBehaviour
         {
             for (int i = 0; i < nRemoveCnt; i++)
             {
-                
                 Destroy(removablePieceList[i]);
-                //Destroy();
             }
 
             //ピース生成
@@ -151,13 +169,13 @@ public class Piece : MonoBehaviour
 
             GameObject piece = Instantiate(piecePrefab, pos, Quaternion.AngleAxis(Random.Range(0, 0), Vector3.forward)) as GameObject;
 
-            int nSpriteId = Random.Range(0, 4);
+            int nPieceId = Random.Range(0, 4);
 
-            piece.name = "sample" + nSpriteId;
+            piece.name = "sample" + nPieceId;
 
             SpriteRenderer spriteObj = piece.GetComponent<SpriteRenderer>();
 
-            spriteObj.sprite = pieceSprites[nSpriteId];
+            spriteObj.sprite = pieceSprites[nPieceId];
 
             yield return new WaitForSeconds(0.5f);
         }

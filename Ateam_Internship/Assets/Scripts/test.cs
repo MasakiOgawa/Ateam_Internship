@@ -26,6 +26,8 @@ public class test : MonoBehaviour
 		Screen.SetResolution(360, 640, Screen.fullScreen);
 		
 		tex00 = tex1;
+
+        Application.targetFrameRate = 60;
 	}
 
 	// Update is called once per frame

@@ -32,4 +32,13 @@ public static class DEFINE
 		HEART,          // ハート
 		CLUB,           // クラブ
 	}
+
+    // ゲーム状態
+    public enum GAME_STATE
+    {
+        NONE = 0,           // 何もなし
+        PLAYER_TURN,        // プレイヤー
+        ENEMY_TURN,         // エネミー
+        PUZZLE_CLEAN,       // パズルクリーン
+    }
 }

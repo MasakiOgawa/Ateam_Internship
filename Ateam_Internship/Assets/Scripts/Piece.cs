@@ -7,7 +7,8 @@ public class Piece : MonoBehaviour
 {
     public GameObject piecePrefab;
     public Sprite[] pieceSprites;
-
+    [SerializeField]
+    private GameObject gameManager;
     private LineRenderer lineRenderer;
     private GameObject lineObj;
     private GameObject startPiece;      // 最初にドラッグしたピース
@@ -53,7 +54,7 @@ public class Piece : MonoBehaviour
     }
 
     // クリック開始処理
-    private void OnDragStart()
+    public void OnDragStart()
     {
         // クリックした位置のオブジェクトを取得
         RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
@@ -81,7 +82,7 @@ public class Piece : MonoBehaviour
     }
 
     // クリック中の処理
-    private void OnDragging()
+    public void OnDragging()
     {
         RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
 
@@ -92,23 +93,26 @@ public class Piece : MonoBehaviour
             // 最後とは別オブジェクトである時
             if (startPiece != hitObj && endPiece != hitObj)     //hitObj.name == currentName && 
             {
-                //２つのオブジェクトの距離を取得
-                float fDistance = Vector2.Distance(hitObj.transform.position, endPiece.transform.position);
-
-                if (fDistance < 1.0f)
+                if (hitObj != null && endPiece != null)
                 {
-                    //削除対象のオブジェクトを格納
-                    endPiece = hitObj;
+                    //２つのオブジェクトの距離を取得
+                    float fDistance = Vector2.Distance(hitObj.transform.position, endPiece.transform.position);
 
-                    PushToList(hitObj);
-
-                    // 線を引く
-                    lineRenderer.positionCount = removablePieceList.Count;
-
-                    for (int i = 0; i < removablePieceList.Count; i++)
+                    if (fDistance < 1.0f)
                     {
-                       GameObject obj = removablePieceList[i];
-                       lineRenderer.SetPosition(i, obj.transform.position);
+                        //削除対象のオブジェクトを格納
+                        endPiece = hitObj;
+
+                        PushToList(hitObj);
+
+                        // 線を引く
+                        lineRenderer.positionCount = removablePieceList.Count;
+
+                        for (int i = 0; i < removablePieceList.Count; i++)
+                        {
+                            GameObject obj = removablePieceList[i];
+                            lineRenderer.SetPosition(i, obj.transform.position);
+                        }
                     }
                 }
             }
@@ -116,15 +120,28 @@ public class Piece : MonoBehaviour
     }
 
     // クリック終了時処理
-    private void OnDragEnd()
+    public void OnDragEnd()
     {
         int nRemoveCnt = removablePieceList.Count;
 
         if (nRemoveCnt >= 2 && nRemoveCnt <= 8)
         {
+            DEFINE.GAME_STATE state = gameManager.GetComponent<GameManager>().GetGameState();
+
             for (int i = 0; i < nRemoveCnt; i++)
             {
-                ChangeColor(removablePieceList[i], new Color(0.5f, 0.5f, 1.0f, 0.5f));
+                //ChangeColor(removablePieceList[i], new Color(0.5f, 0.5f, 1.0f, 0.5f));
+                ChangeColor(removablePieceList[i], new Color(1.0f, 1.0f, 1.0f, 1.0f));
+
+                if (state == DEFINE.GAME_STATE.PLAYER_TURN)
+                {
+                    GetComponent<PuzzlePiece>().SetState(DEFINE.PUZZLE_PIECE_STATE.PLAYER);
+                }
+
+                if (state == DEFINE.GAME_STATE.ENEMY_TURN)
+                {
+                    GetComponent<PuzzlePiece>().SetState(DEFINE.PUZZLE_PIECE_STATE.ENEMY);
+                }
 
                 lineRenderer.positionCount = 0;
             }

@@ -27,7 +27,7 @@ public class Piece : MonoBehaviour
         lineRenderer.startWidth = 0.1f;
         lineRenderer.endWidth = 0.1f;
 
-        StartCoroutine(SetPiece(39));
+        //StartCoroutine(SetPiece(39));
 
         nCnt = 0;
     }
@@ -65,7 +65,7 @@ public class Piece : MonoBehaviour
             //オブジェクトの名前を前方一致で判定
             string pieceName = hitObj.name;
 
-            if (pieceName.StartsWith("sample"))
+            if (pieceName.StartsWith("PuzzlePiece"))
             {
                 startPiece = hitObj;
                 endPiece = hitObj;
@@ -142,44 +142,44 @@ public class Piece : MonoBehaviour
             }
         }
 
-        if(nCnt >= 4)
-        {
-            for (int i = 0; i < nRemoveCnt; i++)
-            {
-                Destroy(removablePieceList[i]);
-            }
+        //if(nCnt >= 4)
+        //{
+        //    for (int i = 0; i < nRemoveCnt; i++)
+        //    {
+        //        Destroy(removablePieceList[i]);
+        //    }
 
-            //ピース生成
-            StartCoroutine(SetPiece(nRemoveCnt));
+        //    //ピース生成
+        //    StartCoroutine(SetPiece(nRemoveCnt));
 
-            nCnt = 0;
-        }
+        //    nCnt = 0;
+        //}
 
         // 初期化
         startPiece = null;
         endPiece = null;
     }
 
-    // ピースセット
-    IEnumerator SetPiece(int count)
-    {
-        for (int i = 0; i < count; i++)
-        {
-            Vector2 pos = new Vector2(Random.Range(-2.0f, 2.0f), 7);
+    //// ピースセット
+    //IEnumerator SetPiece(int count)
+    //{
+    //    for (int i = 0; i < count; i++)
+    //    {
+    //        Vector2 pos = new Vector2(Random.Range(-2.0f, 2.0f), 7);
 
-            GameObject piece = Instantiate(piecePrefab, pos, Quaternion.AngleAxis(Random.Range(0, 0), Vector3.forward)) as GameObject;
+    //        GameObject piece = Instantiate(piecePrefab, pos, Quaternion.AngleAxis(Random.Range(0, 0), Vector3.forward)) as GameObject;
 
-            int nPieceId = Random.Range(0, 4);
+    //        int nPieceId = Random.Range(0, 4);
 
-            piece.name = "sample" + nPieceId;
+    //        piece.name = "sample" + nPieceId;
 
-            SpriteRenderer spriteObj = piece.GetComponent<SpriteRenderer>();
+    //        SpriteRenderer spriteObj = piece.GetComponent<SpriteRenderer>();
 
-            spriteObj.sprite = pieceSprites[nPieceId];
+    //        spriteObj.sprite = pieceSprites[nPieceId];
 
-            yield return new WaitForSeconds(0.5f);
-        }
-    }
+    //        yield return new WaitForSeconds(0.5f);
+    //    }
+    //}
 
     void PushToList(GameObject obj)
     {

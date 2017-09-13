@@ -8,5 +8,28 @@ using System.Collections;
 //--------------------------------------------------
 public static class DEFINE
 {
-	
+	public const int PUZZLE_PIECE_MAX = 39;     // パズルのピースの最大数
+
+	//--------------------------------------------------
+	// 列挙体定義
+	//--------------------------------------------------
+
+	// パズルのピースの状態
+	public enum PUZZLE_PIECE_STATE
+	{
+		NONE = 0,       // 何もなし
+		PLAYER,         // プレイヤー
+		ENEMY           // エネミー
+	}
+
+
+	// パズルピースの柄
+	public enum PUZZLE_PIECE_SUIT
+	{
+		NONE = 0,       // 何もなし
+		SPADE,          // スペード
+		DIAMOND,        // ダイヤ
+		HEART,          // ハート
+		CLUB,           // クラブ
+	}
 }

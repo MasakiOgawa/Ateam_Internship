@@ -7,14 +7,16 @@ public class GameManager : MonoBehaviour
 	//--------------------------------------------------
 	// 変数定義
 	//--------------------------------------------------
-	private DEFINE.GAME_STATE GameState = DEFINE.GAME_STATE.ENEMY_TURN;		// ゲーム状態情報
+	private DEFINE.GAME_STATE GameState;		// ゲーム状態情報
 
 	//--------------------------------------------------
 	// スタート
 	//--------------------------------------------------
 	void Start()
 	{
+		GameState = DEFINE.GAME_STATE.PLAYER_TURN;  // ゲーム状態
 
+		Screen.SetResolution(340, 640, false, 60);
 	}
 
 
@@ -23,6 +25,12 @@ public class GameManager : MonoBehaviour
 	//--------------------------------------------------
 	void Update()
 	{
+		// ESCキーが押されたらゲーム終了
+		if (Input.GetKeyDown(KeyCode.Escape))
+		{
+			Application.Quit();
+		}
+
 		// ゲーム状態管理
 		switch (GameState)
 		{
@@ -44,8 +52,15 @@ public class GameManager : MonoBehaviour
 		}
 	}
 
+	// ゲーム状態を取得
     public DEFINE.GAME_STATE GetGameState()
     {
         return GameState;
     }
+
+	// ゲーム状態を設定
+	public void SetGameState(DEFINE.GAME_STATE state)
+	{
+		GameState = state;
+	}
 }

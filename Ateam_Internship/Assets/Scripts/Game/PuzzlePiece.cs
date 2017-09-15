@@ -7,15 +7,15 @@ public class PuzzlePiece : MonoBehaviour
 	//--------------------------------------------------
 	// 定数定義
 	//--------------------------------------------------
-	private const float PlayerColor_R = 1.0f;		// プレイヤー色情報 R
-	private const float PlayerColor_G = 0.5f;		// プレイヤー色情報 G
-	private const float PlayerColor_B = 1.0f;		// プレイヤー色情報 B
-	private const float PlayerColor_A = 1.0f;		// プレイヤー色情報 A
+	private const float PlayerColor_R = 1.0f;       // プレイヤー色情報 R
+	private const float PlayerColor_G = 0.5f;       // プレイヤー色情報 G
+	private const float PlayerColor_B = 1.0f;       // プレイヤー色情報 B
+	private const float PlayerColor_A = 1.0f;       // プレイヤー色情報 A
 
-	private const float EnemyColor_R = 0.5f;		// エネミー色情報 R
-	private const float EnemyColor_G = 0.5f;		// エネミー色情報 G
-	private const float EnemyColor_B = 1.0f;		// エネミー色情報 B
-	private const float EnemyColor_A = 1.0f;		// エネミー色情報 A
+	private const float EnemyColor_R = 0.5f;        // エネミー色情報 R
+	private const float EnemyColor_G = 0.5f;        // エネミー色情報 G
+	private const float EnemyColor_B = 1.0f;        // エネミー色情報 B
+	private const float EnemyColor_A = 1.0f;        // エネミー色情報 A
 
 
 	//--------------------------------------------------
@@ -23,11 +23,14 @@ public class PuzzlePiece : MonoBehaviour
 	//--------------------------------------------------
 
 	// プライベート変数
-	private Color PuzzlePiececolor;		// パズルピース色情報
+	private Color PuzzlePiececolor;     // パズルピース色情報
 	private Sprite PuzzlePieceTex;      // パズルピーステクスチャ情報
 
-	private DEFINE.PUZZLE_PIECE_STATE PuzzlePieceState;			// パズルのピースの状態
-	private DEFINE.PUZZLE_PIECE_SUIT PuzzlePieceSuit;			// パズルのピースの柄
+	private DEFINE.PUZZLE_PIECE_STATE PuzzlePieceState;         // パズルのピースの状態
+	private DEFINE.PUZZLE_PIECE_SUIT PuzzlePieceSuit;           // パズルのピースの柄
+
+	private LineRenderer lineRenderer;
+	private GameObject lineObj;
 
 	// デバッグ用
 	private bool ClickRight;            // 右クリックが押されているか
@@ -43,18 +46,18 @@ public class PuzzlePiece : MonoBehaviour
 	[SerializeField]
 	private Sprite PuzzlePiece_tex4;
 
-
 	//--------------------------------------------------
 	// スタート
 	//--------------------------------------------------
 	void Start()
 	{
 		// 初期化
-		PuzzlePiececolor = new Color(PlayerColor_R, PlayerColor_G, PlayerColor_B, PlayerColor_A);	// 色情報
+		PuzzlePiececolor = new Color(PlayerColor_R, PlayerColor_G, PlayerColor_B, PlayerColor_A);   // 色情報
 
-		PuzzlePieceTex = PuzzlePiece_tex1;						// テクスチャ情報
-		PuzzlePieceState = DEFINE.PUZZLE_PIECE_STATE.NONE;		// パズルピースの状態
-		PuzzlePieceSuit = DEFINE.PUZZLE_PIECE_SUIT.NONE;		// パズルピースの柄
+		PuzzlePieceTex = PuzzlePiece_tex1;                      // テクスチャ情報
+		PuzzlePieceState = DEFINE.PUZZLE_PIECE_STATE.NONE;      // パズルピースの状態
+		PuzzlePieceSuit = DEFINE.PUZZLE_PIECE_SUIT.NONE;        // パズルピースの柄
+
 	}
 
 
@@ -63,14 +66,10 @@ public class PuzzlePiece : MonoBehaviour
 	//--------------------------------------------------
 	void Update()
 	{
-		// ESCキーが押されたらゲーム終了
-		if (Input.GetKeyDown(KeyCode.Escape))
-		{
-			Application.Quit();
-		}
+
 
 		// デバッグ用
-		DebugPuzzle();
+		//DebugPuzzle();
 	}
 
 
@@ -87,19 +86,6 @@ public class PuzzlePiece : MonoBehaviour
 		}
 	}
 
-
-	//--------------------------------------------------
-	// オブジェクトがタッチされているときの処理
-	//--------------------------------------------------
-	public void OnTouch()
-	{
-		Debug.Log("touch");
-
-		// パズルピースの色を変更
-		//GetComponent<SpriteRenderer>().color = PuzzlePiececolor;
-	}
-
-
 	//--------------------------------------------------
 	// パズルの状態設定
 	//--------------------------------------------------
@@ -111,16 +97,18 @@ public class PuzzlePiece : MonoBehaviour
 		// 状態に合わせて色を変更
 		switch (PuzzlePieceState)
 		{
-			case DEFINE.PUZZLE_PIECE_STATE.NONE:
+			case DEFINE.PUZZLE_PIECE_STATE.NONE:        // 何もなし
 				PuzzlePiececolor = Color.white;
 				break;
 
-			case DEFINE.PUZZLE_PIECE_STATE.PLAYER:
+			case DEFINE.PUZZLE_PIECE_STATE.PLAYER:      // プレイヤー
 				PuzzlePiececolor = new Color(PlayerColor_R, PlayerColor_G, PlayerColor_B, PlayerColor_A);
+				GetComponent<SpriteRenderer>().color = PuzzlePiececolor;
 				break;
 
-			case DEFINE.PUZZLE_PIECE_STATE.ENEMY:
+			case DEFINE.PUZZLE_PIECE_STATE.ENEMY:       // エネミー
 				PuzzlePiececolor = new Color(EnemyColor_R, EnemyColor_G, EnemyColor_B, EnemyColor_A);
+				GetComponent<SpriteRenderer>().color = PuzzlePiececolor;
 				break;
 		}
 	}
@@ -136,24 +124,35 @@ public class PuzzlePiece : MonoBehaviour
 
 		switch (PuzzlePieceSuit)
 		{
-			case DEFINE.PUZZLE_PIECE_SUIT.SPADE:			// スペード
+			case DEFINE.PUZZLE_PIECE_SUIT.SPADE:            // スペード
 				GetComponent<SpriteRenderer>().sprite = PuzzlePiece_tex1;
 				break;
 
-			case DEFINE.PUZZLE_PIECE_SUIT.DIAMOND:			// ダイヤ
+			case DEFINE.PUZZLE_PIECE_SUIT.DIAMOND:          // ダイヤ
 				GetComponent<SpriteRenderer>().sprite = PuzzlePiece_tex2;
 				break;
 
-			case DEFINE.PUZZLE_PIECE_SUIT.HEART:			// ハート
+			case DEFINE.PUZZLE_PIECE_SUIT.HEART:            // ハート
 				GetComponent<SpriteRenderer>().sprite = PuzzlePiece_tex3;
 				break;
 
-			case DEFINE.PUZZLE_PIECE_SUIT.CLUB:				// クラブ
+			case DEFINE.PUZZLE_PIECE_SUIT.CLUB:             // クラブ
 				GetComponent<SpriteRenderer>().sprite = PuzzlePiece_tex4;
 				break;
 		}
 	}
 
+	// ピースの状態取得
+	public DEFINE.PUZZLE_PIECE_STATE GetState()
+	{
+		return PuzzlePieceState;
+	}
+
+	// パズルの柄取得
+	public DEFINE.PUZZLE_PIECE_SUIT GetSuit()
+	{
+		return PuzzlePieceSuit;
+	}
 
 	//--------------------------------------------------
 	// デバッグ用
@@ -221,22 +220,22 @@ public class PuzzlePiece : MonoBehaviour
 		{
 			switch (Random.Range(1, 5))
 			{
-				case 1:			// スペード
+				case 1:         // スペード
 					GetComponent<SpriteRenderer>().sprite = PuzzlePiece_tex1;
 					PuzzlePieceSuit = DEFINE.PUZZLE_PIECE_SUIT.SPADE;
 					break;
 
-				case 2:			// ダイヤ
+				case 2:         // ダイヤ
 					GetComponent<SpriteRenderer>().sprite = PuzzlePiece_tex2;
 					PuzzlePieceSuit = DEFINE.PUZZLE_PIECE_SUIT.DIAMOND;
 					break;
 
-				case 3:			// ハート
+				case 3:         // ハート
 					GetComponent<SpriteRenderer>().sprite = PuzzlePiece_tex3;
 					PuzzlePieceSuit = DEFINE.PUZZLE_PIECE_SUIT.HEART;
 					break;
 
-				case 4:			// クローバー
+				case 4:         // クローバー
 					GetComponent<SpriteRenderer>().sprite = PuzzlePiece_tex4;
 					PuzzlePieceSuit = DEFINE.PUZZLE_PIECE_SUIT.CLUB;
 					break;

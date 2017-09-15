@@ -20,7 +20,8 @@ public class PuzzleManager : MonoBehaviour
 
 	// インスペクター表示
 	[SerializeField] private GameObject PuzzlePiece_Prehab;      // パズルのプレハブ情報
-
+	[SerializeField] private float PieceWight;		// ピースの幅
+	[SerializeField] private float PieceHeight;		// ピースの高さ
 
 	//--------------------------------------------------
 	// スタート 
@@ -55,7 +56,7 @@ public class PuzzleManager : MonoBehaviour
 				for (int Height = 0; Height < PUZZLE_HEIGHT; Height++)
 				{
 					// ピースのインスタンス生成
-					PuzzlePiece[((Wight / 2) * 11) + Height] = Instantiate(PuzzlePiece_Prehab, new Vector3(-2.1f + (0.7f * Wight), -0.35f + (-0.8f * Height), 0), Quaternion.Euler(0, 0, 0), transform);
+					PuzzlePiece[((Wight / 2) * 11) + Height] = Instantiate(PuzzlePiece_Prehab, new Vector3(PuzzlePiece_Prehab.transform.position.x + (PieceWight * Wight), PuzzlePiece_Prehab.transform.position.y + (PieceHeight * Height), 0), Quaternion.Euler(0, 0, 0), transform);
 
 					// ランダムでピースの柄を設定
 					switch (Random.Range(1, 5))
@@ -84,7 +85,7 @@ public class PuzzleManager : MonoBehaviour
 				for (int Height = 0; Height < PUZZLE_HEIGHT - 1; Height++)
 				{
 					// ピースのインスタンス生成
-					PuzzlePiece[(Wight * 6 - OddNumber) + Height] = Instantiate(PuzzlePiece_Prehab, new Vector3(-2.1f + (0.7f * Wight), -0.75f + (-0.8f * Height), 0), Quaternion.Euler(0, 0, 0), transform);
+					PuzzlePiece[(Wight * 6 - OddNumber) + Height] = Instantiate(PuzzlePiece_Prehab, new Vector3(PuzzlePiece_Prehab.transform.position.x + (PieceWight  * Wight), -0.66f + (PieceHeight * Height), 0), Quaternion.Euler(0, 0, 0), transform);
 
 					// ランダムでピースの柄を設定
 					switch (Random.Range(1, 5))
@@ -111,5 +112,13 @@ public class PuzzleManager : MonoBehaviour
 				OddNumber++;
 			}
 		}
+	}
+
+	//--------------------------------------------------
+	// パズルの情報を取得
+	//--------------------------------------------------
+	public GameObject[] GetPuzzle()
+	{
+		return PuzzlePiece;
 	}
 }

@@ -41,8 +41,17 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: piece
-    uniqueID: 2229396075
+  - name: BG
+    uniqueID: 3345925425
+    locked: 0
+  - name: puzzle_BG
+    uniqueID: 290392763
+    locked: 0
+  - name: puzzle_Piece
+    uniqueID: 3801289813
+    locked: 0
+  - name: puzzle_frame
+    uniqueID: 1959852701
     locked: 0
   - name: line
     uniqueID: 479228601

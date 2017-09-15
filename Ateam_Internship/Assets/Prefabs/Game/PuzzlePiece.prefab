@@ -20,10 +20,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4742722172358512}
   - component: {fileID: 212400270908729906}
-  - component: {fileID: 60582566563674900}
-  - component: {fileID: 114727714486590072}
   - component: {fileID: 114107425948831198}
-  - component: {fileID: 114013411878769620}
+  - component: {fileID: 114727714486590072}
+  - component: {fileID: 58479325353270172}
   - component: {fileID: 120614235789788834}
   m_Layer: 0
   m_Name: PuzzlePiece
@@ -39,14 +38,14 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1763418720069046}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.1, y: -0.35, z: 10}
-  m_LocalScale: {x: 0.35, y: 0.35, z: 1}
+  m_LocalPosition: {x: -2.13, y: -0.25, z: 0}
+  m_LocalScale: {x: 0.73, y: 0.73, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!60 &60582566563674900
-PolygonCollider2D:
+--- !u!58 &58479325353270172
+CircleCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
@@ -58,57 +57,8 @@ PolygonCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2.56, y: 2.56}
-    newSize: {x: 2.56, y: 2.56}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: 0.97999996, y: -0.56}
-      - {x: 1.24, y: -0.11}
-      - {x: 1.28, y: -0.03}
-      - {x: 1.28, y: 0.03}
-      - {x: 1.24, y: 0.11}
-      - {x: 0.94, y: 0.63}
-      - {x: 0.75, y: 0.96}
-      - {x: 0.68, y: 1.0799999}
-      - {x: 0.64, y: 1.12}
-      - {x: -0.64, y: 1.12}
-      - {x: -0.65999997, y: 1.11}
-      - {x: -0.71999997, y: 1.01}
-      - {x: -0.78999996, y: 0.89}
-      - {x: -0.97999996, y: 0.56}
-      - {x: -1.1999999, y: 0.17999999}
-      - {x: -1.28, y: 0.03}
-      - {x: -1.28, y: -0.03}
-      - {x: -1.27, y: -0.06}
-      - {x: -0.83, y: -0.82}
-      - {x: -0.68, y: -1.0699999}
-      - {x: -0.64, y: -1.12}
-      - {x: 0.64, y: -1.12}
-      - {x: 0.65999997, y: -1.11}
-      - {x: 0.71999997, y: -1.01}
-      - {x: 0.78999996, y: -0.89}
---- !u!114 &114013411878769620
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1763418720069046}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1eac62bf4c0f95049aede3729f11bd1f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  piecePrefab: {fileID: 0}
-  pieceSprites: []
-  gameManager: {fileID: 1840450309792414, guid: a7ac2133c93a8344ab836d09bf6b32ef,
-    type: 2}
+  serializedVersion: 2
+  m_Radius: 0.52
 --- !u!114 &114107425948831198
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -120,10 +70,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1bbc70c7d3a0a5469d0b26801ef4332, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PuzzlePiece_tex1: {fileID: 21300000, guid: 35e981b5e2121cf42a0c96e08912c41b, type: 3}
-  PuzzlePiece_tex2: {fileID: 21300000, guid: 54b509cd54a53ce4185c75cfeba0f8b6, type: 3}
-  PuzzlePiece_tex3: {fileID: 21300000, guid: fff470e5e2939524d9c9fdf485ce949c, type: 3}
-  PuzzlePiece_tex4: {fileID: 21300000, guid: f0e095a1647380e47b0645e79395c6a0, type: 3}
+  PuzzlePiece_tex1: {fileID: 21300000, guid: bf874c2b77fb09d48813848a3d3daba3, type: 3}
+  PuzzlePiece_tex2: {fileID: 21300000, guid: 43f7f3d414d2ba142b0c543fd2f86a6b, type: 3}
+  PuzzlePiece_tex3: {fileID: 21300000, guid: 4f34f60519f8c1148952871c2bf07a7c, type: 3}
+  PuzzlePiece_tex4: {fileID: 21300000, guid: caae14f69ad03d44daabb28b87dea169, type: 3}
 --- !u!114 &114727714486590072
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -141,17 +91,6 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 114107425948831198}
-          m_MethodName: OnTouch
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 114013411878769620}
           m_MethodName: OnDragging
           m_Mode: 1
           m_Arguments:
@@ -168,7 +107,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 114013411878769620}
+        - m_Target: {fileID: 114107425948831198}
           m_MethodName: OnDragEnd
           m_Mode: 1
           m_Arguments:
@@ -185,7 +124,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 114013411878769620}
+        - m_Target: {fileID: 114107425948831198}
           m_MethodName: OnDragStart
           m_Mode: 1
           m_Arguments:
@@ -313,8 +252,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -493677483
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 120059e6ea4dda54a82e27a0b8526e49, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

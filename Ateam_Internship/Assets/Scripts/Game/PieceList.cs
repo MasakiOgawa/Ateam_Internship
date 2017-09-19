@@ -11,6 +11,7 @@ public class PieceList : MonoBehaviour
     //private GameObject gameManager;
     
     private GameObject startPiece;      // 最初にドラッグしたピース
+    private GameObject nextPiece;
     private GameObject endPiece;        // 最後にドラッグしたピース
     private string currentName;         // 名前判定用のstring変数
     private int nCnt;                   // 塗った回数
@@ -75,15 +76,17 @@ public class PieceList : MonoBehaviour
 				if (pieceName.StartsWith("PuzzlePiece"))
 				{
 					startPiece = hitObj;
-					endPiece = hitObj;
+                    nextPiece = hitObj;
+                    endPiece = hitObj;
 					currentName = hitObj.name;
 
 					//削除対象オブジェクトリストの初期化
 					removablePieceList = new List<GameObject>();
 
-					//削除対象のオブジェクトを格納
-					PushToList(hitObj);
-				}
+                    //削除対象のオブジェクトを格納
+                    PushToList(hitObj);
+
+                }
 			}
 		}
 	}
@@ -101,21 +104,26 @@ public class PieceList : MonoBehaviour
 				GameObject hitObj = hit.collider.gameObject;
 
 				// 最後とは別オブジェクトである時
-				if (startPiece != hitObj && endPiece != hitObj)     //hitObj.name == currentName && 
+				if (startPiece != hitObj && endPiece != hitObj)   
 				{
 					if (hitObj != null && endPiece != null)
 					{
 						//２つのオブジェクトの距離を取得
 						float fDistance = Vector2.Distance(hitObj.transform.position, endPiece.transform.position);
 
-						if (fDistance < 1.0f)
-						{
-							//削除対象のオブジェクトを格納
-							endPiece = hitObj;
+                        int nRemoveCnt = removablePieceList.Count;
 
-							PushToList(hitObj);
-						}
-					}
+                        for (int Cnt = 0; Cnt < removablePieceList.Count; Cnt++)
+                        {
+                            if (fDistance < 1.0f)
+                            {
+                                //削除対象のオブジェクトを格納
+                                endPiece = removablePieceList[Cnt];
+                                PushToList(removablePieceList[Cnt]);
+
+                            }
+                        }
+                    }
 				}
             }
         }
@@ -184,13 +192,19 @@ public class PieceList : MonoBehaviour
         ChangeColor(obj, new Color(1.0f, 1.0f, 1.0f, 0.5f));
     }
 
+    public void RemoveToList(GameObject obj)
+    {
+        removablePieceList.Remove(obj);
+
+        ChangeColor(obj, new Color(1.0f, 1.0f, 1.0f, 1.0f));
+    }
+
     // 色変え
     void ChangeColor(GameObject obj, Color color)
     {
         //SpriteRendererコンポーネントを取得
         SpriteRenderer pieceTexture = obj.GetComponent<SpriteRenderer>();
 
-        //Colorプロパティのうち、透明度のみ変更する
         pieceTexture.color = new Color(color.r, color.g, color.b, color.a);
     }
 

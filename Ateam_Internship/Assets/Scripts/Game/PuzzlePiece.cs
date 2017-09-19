@@ -7,14 +7,14 @@ public class PuzzlePiece : MonoBehaviour
 	//--------------------------------------------------
 	// 定数定義
 	//--------------------------------------------------
-	private const float PlayerColor_R = 1.0f;       // プレイヤー色情報 R
-	private const float PlayerColor_G = 0.5f;       // プレイヤー色情報 G
-	private const float PlayerColor_B = 1.0f;       // プレイヤー色情報 B
-	private const float PlayerColor_A = 1.0f;       // プレイヤー色情報 A
+	private const float PlayerColor_R = 0.7f;       // プレイヤー色情報 R
+	private const float PlayerColor_G = 0.7f;       // プレイヤー色情報 G
+	private const float PlayerColor_B = 0.7f;       // プレイヤー色情報 B
+	private const float PlayerColor_A = 0.7f;       // プレイヤー色情報 A
 
-	private const float EnemyColor_R = 0.5f;        // エネミー色情報 R
-	private const float EnemyColor_G = 0.5f;        // エネミー色情報 G
-	private const float EnemyColor_B = 1.0f;        // エネミー色情報 B
+	private const float EnemyColor_R = 0.25f;        // エネミー色情報 R
+	private const float EnemyColor_G = 0.25f;        // エネミー色情報 G
+	private const float EnemyColor_B = 0.25f;        // エネミー色情報 B
 	private const float EnemyColor_A = 1.0f;        // エネミー色情報 A
 
 
@@ -52,7 +52,8 @@ public class PuzzlePiece : MonoBehaviour
 	void Start()
 	{
 		// 初期化
-		PuzzlePiececolor = new Color(PlayerColor_R, PlayerColor_G, PlayerColor_B, PlayerColor_A);   // 色情報
+		PuzzlePiececolor = new Color(0.5f, 0.5f, 0.5f, 1.0f);   // 色情報
+		GetComponent<SpriteRenderer>().color = PuzzlePiececolor;
 
 		PuzzlePieceTex = PuzzlePiece_tex1;                      // テクスチャ情報
 		PuzzlePieceState = DEFINE.PUZZLE_PIECE_STATE.NONE;      // パズルピースの状態
@@ -98,7 +99,7 @@ public class PuzzlePiece : MonoBehaviour
 		switch (PuzzlePieceState)
 		{
 			case DEFINE.PUZZLE_PIECE_STATE.NONE:        // 何もなし
-				PuzzlePiececolor = Color.white;
+				PuzzlePiececolor = new Color(0.5f, 0.5f, 0.5f, 1.0f);
 				break;
 
 			case DEFINE.PUZZLE_PIECE_STATE.PLAYER:      // プレイヤー

@@ -5,13 +5,7 @@ using UnityEngine;
 
 public class PieceList : MonoBehaviour
 {
-    //public GameObject piecePrefab;
-    //public Sprite[] pieceSprites;
-    //[SerializeField]
-    //private GameObject gameManager;
-    
-    private GameObject startPiece;      // 最初にドラッグしたピース
-    private GameObject nextPiece;
+   private GameObject startPiece;      // 最初にドラッグしたピース
     private GameObject endPiece;        // 最後にドラッグしたピース
     private string currentName;         // 名前判定用のstring変数
     private int nCnt;                   // 塗った回数
@@ -21,7 +15,7 @@ public class PieceList : MonoBehaviour
     //削除するピースのリスト
     private List<GameObject> removablePieceList = new List<GameObject>();
 
-	private GameManager gameManager;
+	private GameManager gameManager;		// ゲームマネージャー情報
 
 	// Use this for initialization
 	void Start()
@@ -38,23 +32,23 @@ public class PieceList : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
-        if (Input.GetMouseButtonDown(0) && startPiece == null)
-        {   
-            // クリック開始
-            OnDragStart();
-        }
-        else if (Input.GetMouseButtonUp(0))
-        {
-            //クリックを終えた時
-            OnDragEnd();
-        }
-        else if (startPiece != null)
-        {
-            // クリック中
-            OnDragging();
-        }
-    }
+	{
+		if (Input.GetMouseButtonDown(0) && startPiece == null)
+		{
+			// クリック開始
+			OnDragStart();
+		}
+		else if (Input.GetMouseButtonUp(0))
+		{
+			//クリックを終えた時
+			OnDragEnd();
+		}
+		else if (startPiece != null)
+		{
+			// クリック中
+			OnDragging();
+		}
+	}
 
 	// クリック開始処理
 	public void OnDragStart()
@@ -76,7 +70,6 @@ public class PieceList : MonoBehaviour
 				if (pieceName.StartsWith("PuzzlePiece"))
 				{
 					startPiece = hitObj;
-                    nextPiece = hitObj;
                     endPiece = hitObj;
 					currentName = hitObj.name;
 
@@ -95,6 +88,7 @@ public class PieceList : MonoBehaviour
     public void OnDragging()
     {
         RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
+		bool ListFlag = false;		// リスト比較フラグ
 
         if (hit.collider != null)
         {
@@ -111,19 +105,27 @@ public class PieceList : MonoBehaviour
 						//２つのオブジェクトの距離を取得
 						float fDistance = Vector2.Distance(hitObj.transform.position, endPiece.transform.position);
 
-                        int nRemoveCnt = removablePieceList.Count;
+						if (fDistance < 1.0f)
+						{
+							// 既にリストにピースが入っていないか比較
+							for (int Cnt = 0; Cnt < removablePieceList.Count; Cnt++)
+							{
+								if (hitObj == removablePieceList[Cnt])
+								{
+									// 既にリストに格納されていたらフラグをオンにする
+									ListFlag = true;
+								}
+							}
 
-                        for (int Cnt = 0; Cnt < removablePieceList.Count; Cnt++)
-                        {
-                            if (fDistance < 1.0f)
-                            {
-                                //削除対象のオブジェクトを格納
-                                endPiece = removablePieceList[Cnt];
-                                PushToList(removablePieceList[Cnt]);
-
-                            }
-                        }
-                    }
+							// リストにまだ格納されていなかったら
+							if (ListFlag == false)
+							{
+								//削除対象のオブジェクトを格納
+								endPiece = hitObj;
+								PushToList(hitObj);
+							}
+						}
+					}
 				}
             }
         }
@@ -138,7 +140,7 @@ public class PieceList : MonoBehaviour
         {
             for (int i = 0; i < nRemoveCnt; i++)
             {
-                ChangeColor(removablePieceList[i], new Color(1.0f, 1.0f, 1.0f, 1.0f));
+                ChangeColor(removablePieceList[i], new Color(0.5f, 0.5f, 0.5f, 1.0f));
 
 				// プレイヤーのターンだったら
                 if (gameManager.GetGameState() == DEFINE.GAME_STATE.PLAYER_TURN)
@@ -174,7 +176,7 @@ public class PieceList : MonoBehaviour
             //色の透明度を戻す
             for (int i = 0; i < nRemoveCnt; i++)
             {
-                ChangeColor(removablePieceList[i], new Color(1.0f, 1.0f, 1.0f, 1.0f));
+                ChangeColor(removablePieceList[i], new Color(0.5f, 0.5f, 0.5f, 1.0f));
             }
         }
         // 初期化
@@ -189,14 +191,14 @@ public class PieceList : MonoBehaviour
     {
         removablePieceList.Add(obj);
 
-        ChangeColor(obj, new Color(1.0f, 1.0f, 1.0f, 0.5f));
+        ChangeColor(obj, new Color(0.35f, 0.35f, 0.35f, 0.35f));
     }
 
     public void RemoveToList(GameObject obj)
     {
         removablePieceList.Remove(obj);
 
-        ChangeColor(obj, new Color(1.0f, 1.0f, 1.0f, 1.0f));
+        ChangeColor(obj, new Color(0.5f, 0.5f, 0.5f, 1.0f));
     }
 
     // 色変え

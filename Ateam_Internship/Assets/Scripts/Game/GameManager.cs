@@ -7,7 +7,7 @@ public class GameManager : MonoBehaviour
 	//--------------------------------------------------
 	// 変数定義
 	//--------------------------------------------------
-	private DEFINE.GAME_STATE GameState;		// ゲーム状態情報
+	private DEFINE.GAME_STATE GameState;        // ゲーム状態情報
 
 	//--------------------------------------------------
 	// スタート
@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviour
 	{
 		GameState = DEFINE.GAME_STATE.PLAYER_TURN;  // ゲーム状態
 
-		Screen.SetResolution(340, 640, false, 60);
+		//Screen.SetResolution(340, 640, false, 60);
 	}
 
 

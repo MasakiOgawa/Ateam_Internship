@@ -121,4 +121,13 @@ public class PuzzleManager : MonoBehaviour
 	{
 		return PuzzlePiece;
 	}
+
+	// パズルの状態をリセット
+	public void AllClean()
+	{
+		for (int Cnt = 0; Cnt < PuzzlePiece.Length; Cnt++)
+		{
+			PuzzlePiece[Cnt].GetComponent<PuzzlePiece>().SetState(DEFINE.PUZZLE_PIECE_STATE.NONE);
+		}
+	}
 }

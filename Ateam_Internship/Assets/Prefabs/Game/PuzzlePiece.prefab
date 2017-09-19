@@ -38,8 +38,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1763418720069046}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.13, y: -0.25, z: 0}
-  m_LocalScale: {x: 0.73, y: 0.73, z: 1}
+  m_LocalPosition: {x: -2.13, y: -0.24, z: 0}
+  m_LocalScale: {x: 0.72, y: 0.72, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -70,10 +70,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1bbc70c7d3a0a5469d0b26801ef4332, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PuzzlePiece_tex1: {fileID: 21300000, guid: bf874c2b77fb09d48813848a3d3daba3, type: 3}
-  PuzzlePiece_tex2: {fileID: 21300000, guid: 43f7f3d414d2ba142b0c543fd2f86a6b, type: 3}
-  PuzzlePiece_tex3: {fileID: 21300000, guid: 4f34f60519f8c1148952871c2bf07a7c, type: 3}
-  PuzzlePiece_tex4: {fileID: 21300000, guid: caae14f69ad03d44daabb28b87dea169, type: 3}
+  PuzzlePiece_tex1: {fileID: 21300000, guid: ce50981176ad49c4181036e4990ea823, type: 3}
+  PuzzlePiece_tex2: {fileID: 21300000, guid: 11b16079f5fce5b408e9e31b1f798a08, type: 3}
+  PuzzlePiece_tex3: {fileID: 21300000, guid: 2cc43d3d680c6764891c0cecb50dcfbb, type: 3}
+  PuzzlePiece_tex4: {fileID: 21300000, guid: 5c2dbc54988daff4b831d196b21267b4, type: 3}
 --- !u!114 &114727714486590072
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -236,7 +236,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: fc2315d82e593dd498d805a73279cd80, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

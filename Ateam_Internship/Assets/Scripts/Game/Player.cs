@@ -1,51 +1,67 @@
-﻿//using System.Collections;
-//using System.Collections.Generic;
-//using UnityEngine;
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
-//public class Player : MonoBehaviour
-//{
-//	// キャラクター情報構造体
-//	struct Character
-//	{
-//		private float Life;							// ライフ
-//		private DEFINE.PUZZLE_PIECE_SUIT Skiil1;	// スキルに必要なスート1
-//		private DEFINE.PUZZLE_PIECE_SUIT Skiil2;	// スキルに必要なスート2
-//	}
+public class Player : MonoBehaviour
+{
+	// キャラクター情報構造体
+	public struct Character
+	{
+		private float Life;                         // ライフ
+		private float Attack;						// アタック
+		private DEFINE.PUZZLE_PIECE_SUIT Skiil1;    // スキルに必要なスート1
+		private DEFINE.PUZZLE_PIECE_SUIT Skiil2;    // スキルに必要なスート2
 
-//	// パーティ情報構造体
-//	struct PlayerParty
-//	{
-//		public Character Chara_0;		// リーダー
-//		public Character Chara_1;		// キャラ1(アイコン 左)
-//		public Character Chara_2;      // キャラ2(アイコン 中)
-//		public Character Chara_3;      // キャラ3(アイコン 右)
+		public Character(float life, float attack, DEFINE.PUZZLE_PIECE_SUIT skiil1, DEFINE.PUZZLE_PIECE_SUIT skiil2)
+		{
+			Life = life;			// ライフ
+			Attack = attack;		// アタック
+			Skiil1 = skiil1;		// スキル1
+			Skiil2 = skiil2;		// スキル2
+		}
+	}
 
-//		public PlayerParty (Character Chara0, Character Chara1, Character Chara2, Character Chara3)
-//		{
-//			Chara0 = Chara0;
-//			Chara1 = Chara1;
-//			Chara2 = Chara2;
-//			Chara3 = Chara3;
-//		}
-//	};
+	// パーティ情報構造体
+	public struct Party
+	{
+		Character Chara_0;      // リーダー
+		Character Chara_1;      // キャラ1(アイコン 左)
+		Character Chara_2;      // キャラ2(アイコン 中)
+		Character Chara_3;      // キャラ3(アイコン 右)
 
-//	private PlayerParty Party;		// プレイヤーのパーティ情報
+		// コンストラクタ
+		public Party(Character chara0, Character chara1, Character chara2, Character chara3)
+		{
+			Chara_0 = chara0;       // リーダー
+			Chara_1 = chara1;       // キャラ1(アイコン 左)
+			Chara_2 = chara2;       // キャラ2(アイコン 中)
+			Chara_3 = chara3;       // キャラ3(アイコン 右)
+		}
+	};
 
-//	// Use this for initialization
-//	void Start()
-//	{
-//		Party = new PlayerParty()
-//	}
+	private Party PlayerParty;      // プレイヤーのパーティ情報
+	public float MaxLife;			// プレイヤーの体力
 
-//	// Update is called once per frame
-//	void Update()
-//	{
+	// Use this for initialization
+	void Start()
+	{
+		PlayerParty = new Party(
+			new Character(100, 10, DEFINE.PUZZLE_PIECE_SUIT.CLUB, DEFINE.PUZZLE_PIECE_SUIT.CLUB),        // リーダー
+			new Character(100, 10, DEFINE.PUZZLE_PIECE_SUIT.CLUB, DEFINE.PUZZLE_PIECE_SUIT.CLUB),        // キャラ1(アイコン 左)
+			new Character(100, 10, DEFINE.PUZZLE_PIECE_SUIT.CLUB, DEFINE.PUZZLE_PIECE_SUIT.CLUB),        // キャラ2(アイコン 中)
+			new Character(100, 10, DEFINE.PUZZLE_PIECE_SUIT.CLUB, DEFINE.PUZZLE_PIECE_SUIT.CLUB));       // キャラ3(アイコン 右)
 
-//	}
+	}
 
-//	// プレイヤーのパーティ情報を取得
-//	public PlayerParty GetPlayerParty()
-//	{
-//		return Party;
-//	}
-//}
+	// Update is called once per frame
+	void Update()
+	{
+
+	}
+
+	// プレイヤーのパーティ情報を取得
+	public Party GetPlayerParty()
+	{
+		return PlayerParty;
+	}
+}

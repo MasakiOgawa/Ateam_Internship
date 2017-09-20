@@ -58,7 +58,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.52
+  m_Radius: 0.54
 --- !u!114 &114107425948831198
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -70,6 +70,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1bbc70c7d3a0a5469d0b26801ef4332, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PuzzlePieceSuit: 0
   PuzzlePiece_tex1: {fileID: 21300000, guid: ce50981176ad49c4181036e4990ea823, type: 3}
   PuzzlePiece_tex2: {fileID: 21300000, guid: 11b16079f5fce5b408e9e31b1f798a08, type: 3}
   PuzzlePiece_tex3: {fileID: 21300000, guid: 2cc43d3d680c6764891c0cecb50dcfbb, type: 3}

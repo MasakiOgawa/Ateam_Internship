@@ -4,53 +4,25 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-	// キャラクター情報構造体
-	public struct Character
-	{
-		private float Life;                         // ライフ
-		private float Attack;						// アタック
-		private DEFINE.PUZZLE_PIECE_SUIT Skiil1;    // スキルに必要なスート1
-		private DEFINE.PUZZLE_PIECE_SUIT Skiil2;    // スキルに必要なスート2
-
-		public Character(float life, float attack, DEFINE.PUZZLE_PIECE_SUIT skiil1, DEFINE.PUZZLE_PIECE_SUIT skiil2)
-		{
-			Life = life;			// ライフ
-			Attack = attack;		// アタック
-			Skiil1 = skiil1;		// スキル1
-			Skiil2 = skiil2;		// スキル2
-		}
-	}
-
-	// パーティ情報構造体
-	public struct Party
-	{
-		Character Chara_0;      // リーダー
-		Character Chara_1;      // キャラ1(アイコン 左)
-		Character Chara_2;      // キャラ2(アイコン 中)
-		Character Chara_3;      // キャラ3(アイコン 右)
-
-		// コンストラクタ
-		public Party(Character chara0, Character chara1, Character chara2, Character chara3)
-		{
-			Chara_0 = chara0;       // リーダー
-			Chara_1 = chara1;       // キャラ1(アイコン 左)
-			Chara_2 = chara2;       // キャラ2(アイコン 中)
-			Chara_3 = chara3;       // キャラ3(アイコン 右)
-		}
-	};
-
-	private Party PlayerParty;      // プレイヤーのパーティ情報
-	public float MaxLife;			// プレイヤーの体力
+	private DEFINE.Party PlayerParty;		// プレイヤーのパーティ情報
+	private float PartyLife;                // パーティのライフ
+	[SerializeField]private GaugeController lifeGauge;		// 体力ゲージ
 
 	// Use this for initialization
 	void Start()
 	{
-		PlayerParty = new Party(
-			new Character(100, 10, DEFINE.PUZZLE_PIECE_SUIT.CLUB, DEFINE.PUZZLE_PIECE_SUIT.CLUB),        // リーダー
-			new Character(100, 10, DEFINE.PUZZLE_PIECE_SUIT.CLUB, DEFINE.PUZZLE_PIECE_SUIT.CLUB),        // キャラ1(アイコン 左)
-			new Character(100, 10, DEFINE.PUZZLE_PIECE_SUIT.CLUB, DEFINE.PUZZLE_PIECE_SUIT.CLUB),        // キャラ2(アイコン 中)
-			new Character(100, 10, DEFINE.PUZZLE_PIECE_SUIT.CLUB, DEFINE.PUZZLE_PIECE_SUIT.CLUB));       // キャラ3(アイコン 右)
+		PlayerParty = new DEFINE.Party(
+			new DEFINE.Character(100, 10, DEFINE.PUZZLE_PIECE_SUIT.SPADE, DEFINE.PUZZLE_PIECE_SUIT.SPADE),			// リーダー
+			new DEFINE.Character(100, 10, DEFINE.PUZZLE_PIECE_SUIT.DIAMOND, DEFINE.PUZZLE_PIECE_SUIT.DIAMOND),      // キャラ1(アイコン 左)
+			new DEFINE.Character(100, 10, DEFINE.PUZZLE_PIECE_SUIT.HEART, DEFINE.PUZZLE_PIECE_SUIT.HEART),			// キャラ2(アイコン 中)
+			new DEFINE.Character(100, 10, DEFINE.PUZZLE_PIECE_SUIT.CLUB, DEFINE.PUZZLE_PIECE_SUIT.CLUB));			// キャラ3(アイコン 右)
 
+		// パーティのライフを設定
+		PartyLife = PlayerParty.Chara_0.Life + PlayerParty.Chara_1.Life + PlayerParty.Chara_2.Life + PlayerParty.Chara_3.Life;
+
+		// 体力ゲージを設定
+		lifeGauge.SetGaugeMax(PartyLife);
+		lifeGauge.SetGaugeValue(PartyLife);
 	}
 
 	// Update is called once per frame
@@ -60,8 +32,26 @@ public class Player : MonoBehaviour
 	}
 
 	// プレイヤーのパーティ情報を取得
-	public Party GetPlayerParty()
+	public DEFINE.Party GetPlayerParty()
 	{
 		return PlayerParty;
+	}
+
+	// パーティのライフを減算
+	public void SubPartyLife(float life)
+	{
+		PartyLife -= life;
+	}
+
+	// パーティのライフ取得
+	public float GetPartyLife()
+	{
+		return PartyLife;
+	}
+
+	// プレイヤーの攻撃
+	public void PlayerAttack()
+	{
+
 	}
 }

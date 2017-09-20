@@ -56,7 +56,6 @@ public class PieceList : MonoBehaviour
 		// クリックした位置のオブジェクトを取得
 		RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
 
-
 		if (hit.collider != null)
 		{
 			// ピースの状態が何もなければ
@@ -148,28 +147,30 @@ public class PieceList : MonoBehaviour
 					// リストに格納されているピースの状態を変更
 					removablePieceList[i].GetComponent<PuzzlePiece>().SetState(DEFINE.PUZZLE_PIECE_STATE.PLAYER);
                 }
-
 				// エネミーのターンだったら
-                if (gameManager.GetGameState() == DEFINE.GAME_STATE.ENEMY_TURN)
+                else if (gameManager.GetGameState() == DEFINE.GAME_STATE.ENEMY_TURN)
                 {
 					// リストに格納されているピースの状態を変更
 					removablePieceList[i].GetComponent<PuzzlePiece>().SetState(DEFINE.PUZZLE_PIECE_STATE.ENEMY);
 				}
             }
 
-            nCnt++;
+			// パズル終了フラグオン
+			gameManager.SetPuzzleFlag(true);
 
-			// ターンを変更
-			if (gameManager.GetGameState() == DEFINE.GAME_STATE.PLAYER_TURN)
-			{
-				// エネミーターンに変更
-				gameManager.SetGameState(DEFINE.GAME_STATE.ENEMY_TURN);
-			}
-			else if (gameManager.GetGameState() == DEFINE.GAME_STATE.ENEMY_TURN)
-			{
-				// プレイヤーのターンに変更
-				gameManager.SetGameState(DEFINE.GAME_STATE.PLAYER_TURN);
-			}
+			nCnt++;
+
+			//// ターンを変更
+			//if (gameManager.GetGameState() == DEFINE.GAME_STATE.PLAYER_TURN)
+			//{
+			//	// エネミーターンに変更
+			//	gameManager.SetGameState(DEFINE.GAME_STATE.ENEMY_TURN);
+			//}
+			//else if (gameManager.GetGameState() == DEFINE.GAME_STATE.ENEMY_TURN)
+			//{
+			//	// プレイヤーのターンに変更
+			//	gameManager.SetGameState(DEFINE.GAME_STATE.PLAYER_TURN);
+			//}
 		}
         else
         {
@@ -178,13 +179,9 @@ public class PieceList : MonoBehaviour
             {
                 ChangeColor(removablePieceList[i], new Color(0.5f, 0.5f, 0.5f, 1.0f));
             }
-        }
-        // 初期化
-        startPiece = null;
-        endPiece = null;
 
-		//削除対象オブジェクトリストの初期化
-		removablePieceList = new List<GameObject>();
+			ListInit();
+		}
 	}
 
     public void PushToList(GameObject obj)
@@ -214,5 +211,16 @@ public class PieceList : MonoBehaviour
 	public List<GameObject> GetRemovaleList()
 	{
 		return removablePieceList;
+	}
+
+	// リスト初期化
+	public void ListInit()
+	{
+		// 初期化
+		startPiece = null;
+		endPiece = null;
+
+		//削除対象オブジェクトリストの初期化
+		removablePieceList = new List<GameObject>();
 	}
 }

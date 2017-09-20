@@ -27,7 +27,7 @@ public class PuzzlePiece : MonoBehaviour
 	private Sprite PuzzlePieceTex;      // パズルピーステクスチャ情報
 
 	private DEFINE.PUZZLE_PIECE_STATE PuzzlePieceState;         // パズルのピースの状態
-	private DEFINE.PUZZLE_PIECE_SUIT PuzzlePieceSuit;           // パズルのピースの柄
+	[SerializeField]private DEFINE.PUZZLE_PIECE_SUIT PuzzlePieceSuit;           // パズルのピースの柄
 
 	private LineRenderer lineRenderer;
 	private GameObject lineObj;
@@ -55,9 +55,9 @@ public class PuzzlePiece : MonoBehaviour
 		PuzzlePiececolor = new Color(0.5f, 0.5f, 0.5f, 1.0f);   // 色情報
 		GetComponent<SpriteRenderer>().color = PuzzlePiececolor;
 
-		PuzzlePieceTex = PuzzlePiece_tex1;                      // テクスチャ情報
-		PuzzlePieceState = DEFINE.PUZZLE_PIECE_STATE.NONE;      // パズルピースの状態
-		PuzzlePieceSuit = DEFINE.PUZZLE_PIECE_SUIT.NONE;        // パズルピースの柄
+		//PuzzlePieceTex = PuzzlePiece_tex1;                      // テクスチャ情報
+		//PuzzlePieceState = DEFINE.PUZZLE_PIECE_STATE.NONE;      // パズルピースの状態
+		//PuzzlePieceSuit = DEFINE.PUZZLE_PIECE_SUIT.NONE;        // パズルピースの柄
 
 	}
 

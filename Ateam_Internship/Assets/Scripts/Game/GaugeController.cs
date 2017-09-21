@@ -13,11 +13,15 @@ public class GaugeController : MonoBehaviour
 	private Slider Gauge;       // ゲージの情報を取得
 	private float Value;          // 現在の値
 
+	private void Awake()
+	{
+		Gauge = GetComponent<Slider>();
+	}
+
 	// Use this for initialization
 	private void Start()
 	{
-		// ゲージ情報取得
-		Gauge = GetComponent<Slider>();
+		
 	}
 
 	// Update is called once per frame

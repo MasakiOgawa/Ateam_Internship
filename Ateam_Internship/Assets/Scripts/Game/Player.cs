@@ -19,7 +19,7 @@ public class Player : MonoBehaviour
 
 		// パーティのライフを設定
 		PartyLife = PlayerParty.Chara_0.Life + PlayerParty.Chara_1.Life + PlayerParty.Chara_2.Life + PlayerParty.Chara_3.Life;
-
+		
 		// 体力ゲージを設定
 		lifeGauge.SetGaugeMax(PartyLife);
 		lifeGauge.SetGaugeValue(PartyLife);

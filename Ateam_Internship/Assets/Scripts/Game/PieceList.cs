@@ -10,7 +10,7 @@ public class PieceList : MonoBehaviour
     private string currentName;         // 名前判定用のstring変数
     private int nCnt;                   // 塗った回数
 
-	private GameObject[] Puzzle;	// パズルのピース情報
+	//private GameObject[] Puzzle;	// パズルのピース情報
 
     //削除するピースのリスト
     private List<GameObject> removablePieceList = new List<GameObject>();
@@ -21,7 +21,7 @@ public class PieceList : MonoBehaviour
 	void Start()
     {
 		// パズルの情報を取得
-		Puzzle = GetComponent<PuzzleManager>().GetPuzzle();
+		//Puzzle = GetComponent<PuzzleManager>().GetPuzzle();
 
 		// カウンタ初期化
         nCnt = 0;
@@ -86,20 +86,20 @@ public class PieceList : MonoBehaviour
     // クリック中の処理
     public void OnDragging()
     {
-        RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
-		bool ListFlag = false;		// リスト比較フラグ
+		RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
+		bool ListFlag = false;      // リスト比較フラグ
 
-        if (hit.collider != null)
-        {
+		if (hit.collider != null)
+		{
 			// ピースの状態が何もなければ
-			if(hit.transform.GetComponent<PuzzlePiece>().GetState() == DEFINE.PUZZLE_PIECE_STATE.NONE)
+			if (hit.transform.GetComponent<PuzzlePiece>().GetState() == DEFINE.PUZZLE_PIECE_STATE.NONE)
 			{
 				GameObject hitObj = hit.collider.gameObject;
 
 				// 最後とは別オブジェクトである時
-				if (startPiece != hitObj && endPiece != hitObj)   
+				if (endPiece != hitObj)
 				{
-					if (hitObj != null && endPiece != null)
+					if (hitObj != null)
 					{
 						//２つのオブジェクトの距離を取得
 						float fDistance = Vector2.Distance(hitObj.transform.position, endPiece.transform.position);
@@ -123,12 +123,17 @@ public class PieceList : MonoBehaviour
 								endPiece = hitObj;
 								PushToList(hitObj);
 							}
+							else
+							{
+								endPiece = removablePieceList[removablePieceList.Count - 2];
+								RemoveToList(removablePieceList[removablePieceList.Count - 1]);
+							}
 						}
 					}
 				}
-            }
-        }
-    }
+			}
+		}
+	}
 
     // クリック終了時処理
     public void OnDragEnd()

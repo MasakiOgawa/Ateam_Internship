@@ -8,7 +8,8 @@ public class GameManager : MonoBehaviour
 	// 変数定義
 	//--------------------------------------------------
 	private DEFINE.GAME_STATE GameState;        // ゲーム状態情報
-	private Player player;						// プレイヤー情報
+	private Player player;                      // プレイヤー情報
+	private Enemy enemy;						// エネミー情報
 	private PieceList PieceList;                // ピースのリスト
 	private SkillChecker skillChecker;			// スキルチェック情報
 
@@ -22,7 +23,8 @@ public class GameManager : MonoBehaviour
 	void Start()
 	{
 		GameState = DEFINE.GAME_STATE.PLAYER_TURN;                  // ゲーム状態
-		player = GetComponent<Player>();							// プレイヤー情報を取得
+		player = GetComponent<Player>();                            // プレイヤー情報を取得
+		enemy = GetComponent<Enemy>();								// エネミー情報を取得
 		PieceList = GetComponentInChildren<PieceList>();                      // ピースのリストを取得
 		skillChecker = GetComponent<SkillChecker>();				// スキル情報を取得
 
@@ -35,6 +37,8 @@ public class GameManager : MonoBehaviour
 	//--------------------------------------------------
 	void Update()
 	{
+		bool[] SkillActive;     // スキルが発動しているかどうか
+
 		// ESCキーが押されたらゲーム終了
 		if (Input.GetKeyDown(KeyCode.Escape))
 		{
@@ -50,7 +54,7 @@ public class GameManager : MonoBehaviour
 
 			case DEFINE.GAME_STATE.PLAYER_TURN:     // P1ターン
 
-				bool[] SkillActive;		// スキルが発動しているかどうか
+				//bool[] SkillActive;		// スキルが発動しているかどうか
 
 				// パズルが終了していたら
 				if (PuzzleFlag == true)
@@ -59,23 +63,50 @@ public class GameManager : MonoBehaviour
 					if(SkillFlag == false)
 					{
 						SkillActive = skillChecker.SkillCheckList(player.GetPlayerParty(), PieceList);
-						//SkillFlag = true;
+						SkillFlag = true;
 					}
 
 					// 攻撃フラグオンだったら
 					if(AttackFlag == false)
 					{
-
+						player.PlayerAttack();
 						AttackFlag = true;
 					}
-					// パズル終了フラグオフ
+					
+					SetGameState(DEFINE.GAME_STATE.ENEMY_TURN);
 					PuzzleFlag = false;
+					SkillFlag = false;
+					AttackFlag = false;
 				}
 
 				break;
 
-			case DEFINE.GAME_STATE.ENEMY_TURN:		// エネミーターン
+			case DEFINE.GAME_STATE.ENEMY_TURN:      // エネミーターン
 
+				//bool[] SkillActive;     // スキルが発動しているかどうか
+
+				// パズルが終了していたら
+				if (PuzzleFlag == true)
+				{
+					// スキルが発動したかチェック
+					if (SkillFlag == false)
+					{
+						SkillActive = skillChecker.SkillCheckList(enemy.GetEnemyParty(), PieceList);
+						SkillFlag = true;
+					}
+
+					// 攻撃フラグオンだったら
+					if (AttackFlag == false)
+					{
+						enemy.EnemyAttack();
+						AttackFlag = true;
+					}
+
+					SetGameState(DEFINE.GAME_STATE.PLAYER_TURN);
+					PuzzleFlag = false;
+					SkillFlag = false;
+					AttackFlag = false;
+				}
 				break;
 
 			case DEFINE.GAME_STATE.PUZZLE_CLEAN:		// パズルクリーン
@@ -100,5 +131,11 @@ public class GameManager : MonoBehaviour
 	public void SetPuzzleFlag(bool flag)
 	{
 		PuzzleFlag = flag;
+	}
+
+	// パズルが終了したフラグを取得
+	public bool GetPuzzleFlag()
+	{
+		return PuzzleFlag;
 	}
 }

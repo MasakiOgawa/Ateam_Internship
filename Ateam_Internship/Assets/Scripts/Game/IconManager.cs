@@ -11,6 +11,7 @@ public class IconManager : MonoBehaviour
 	[SerializeField] private Sprite[]   sprite;         // スプライト情報
 	[SerializeField] private Image[]    image;           // イメージ情報
 	[SerializeField] private Player     player;         // プレイヤー情報
+	[SerializeField] private Enemy		enemy;         // エネミー情報
 	[SerializeField] private PieceList  pieceList;      // ピースのリスト情報
 
 	private DEFINE.Party party;     // プレイヤーのパーティ情報
@@ -20,7 +21,14 @@ public class IconManager : MonoBehaviour
 	void Start()
 	{
 		// パーティの情報を取得
-		party =  player.GetPlayerParty();
+		if(player != null)
+		{
+			party = player.GetPlayerParty();
+		}
+		else if(enemy != null)
+		{
+			party = enemy.GetEnemyParty();
+		}
 
 		// リーダー
 		switch (party.Chara_0.Skill1)
@@ -234,8 +242,8 @@ public class IconManager : MonoBehaviour
 		// デバッグ
 		SetSkillFlag(false);
 
-		// リストになにもなかったら
-		if (list.Count == 0 && skillFlag[0] == false && skillFlag[1] == false && skillFlag[2] == false && skillFlag[3] == false)
+		// リストが一つ以下なら
+		if (list.Count <= 1 && skillFlag[0] == false && skillFlag[1] == false && skillFlag[2] == false && skillFlag[3] == false)
 		{
 			// パズルの色を初期化
 			for (int Cnt = 1; Cnt < image.Length; Cnt += 2)

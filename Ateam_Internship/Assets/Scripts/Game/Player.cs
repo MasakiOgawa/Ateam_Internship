@@ -6,20 +6,23 @@ public class Player : MonoBehaviour
 {
 	private DEFINE.Party PlayerParty;		// プレイヤーのパーティ情報
 	private float PartyLife;                // パーティのライフ
-	[SerializeField]private GaugeController lifeGauge;		// 体力ゲージ
+	private float PartyAttack;                // パーティの攻撃力
+	[SerializeField] private GaugeController lifeGauge;     // 体力ゲージ
+	[SerializeField] private Enemy enemy;					// エネミー情報
 
 	// Use this for initialization
 	void Start()
 	{
 		PlayerParty = new DEFINE.Party(
-			new DEFINE.Character(100, 10, DEFINE.PUZZLE_PIECE_SUIT.SPADE, DEFINE.PUZZLE_PIECE_SUIT.SPADE),			// リーダー
-			new DEFINE.Character(100, 10, DEFINE.PUZZLE_PIECE_SUIT.DIAMOND, DEFINE.PUZZLE_PIECE_SUIT.DIAMOND),      // キャラ1(アイコン 左)
-			new DEFINE.Character(100, 10, DEFINE.PUZZLE_PIECE_SUIT.HEART, DEFINE.PUZZLE_PIECE_SUIT.HEART),			// キャラ2(アイコン 中)
-			new DEFINE.Character(100, 10, DEFINE.PUZZLE_PIECE_SUIT.CLUB, DEFINE.PUZZLE_PIECE_SUIT.CLUB));			// キャラ3(アイコン 右)
+			new DEFINE.Character(100, 10, DEFINE.PUZZLE_PIECE_SUIT.SPADE, DEFINE.PUZZLE_PIECE_SUIT.CLUB),			// リーダー
+			new DEFINE.Character(100, 10, DEFINE.PUZZLE_PIECE_SUIT.DIAMOND, DEFINE.PUZZLE_PIECE_SUIT.HEART),      // キャラ1(アイコン 左)
+			new DEFINE.Character(100, 10, DEFINE.PUZZLE_PIECE_SUIT.HEART, DEFINE.PUZZLE_PIECE_SUIT.DIAMOND),			// キャラ2(アイコン 中)
+			new DEFINE.Character(100, 10, DEFINE.PUZZLE_PIECE_SUIT.CLUB, DEFINE.PUZZLE_PIECE_SUIT.SPADE));			// キャラ3(アイコン 右)
 
-		// パーティのライフを設定
+		// パーティの総ステータスを設定
 		PartyLife = PlayerParty.Chara_0.Life + PlayerParty.Chara_1.Life + PlayerParty.Chara_2.Life + PlayerParty.Chara_3.Life;
-		
+		PartyAttack = PlayerParty.Chara_0.Attack + PlayerParty.Chara_1.Attack + PlayerParty.Chara_2.Attack + PlayerParty.Chara_3.Attack;
+
 		// 体力ゲージを設定
 		lifeGauge.SetGaugeMax(PartyLife);
 		lifeGauge.SetGaugeValue(PartyLife);
@@ -28,7 +31,8 @@ public class Player : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
-
+		// ライフゲージに現在の値を設定
+		lifeGauge.SetGaugeValue(PartyLife);
 	}
 
 	// プレイヤーのパーティ情報を取得
@@ -52,6 +56,6 @@ public class Player : MonoBehaviour
 	// プレイヤーの攻撃
 	public void PlayerAttack()
 	{
-
+		enemy.SubPartyLife(PartyAttack);
 	}
 }

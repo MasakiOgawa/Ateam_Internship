@@ -18,18 +18,22 @@ public class PuzzleManager : MonoBehaviour
 
 	// プライベート
 	private GameObject[] PuzzlePiece = new GameObject[DEFINE.PUZZLE_PIECE_MAX];         // 全てのパズルピースの情報
+    private int fillCount;
+    private List<GameObject> removablePieceList;
 
-	// インスペクター表示
-	[SerializeField] private GameObject PuzzlePiece_Prehab;     // パズルのプレハブ情報
-	[SerializeField] private PieceList puzzlePiece;				// パズルピース情報
+    // インスペクター表示
+    [SerializeField] private GameObject PuzzlePiece_Prehab;     // パズルのプレハブ情報
+	[SerializeField] private PieceList puzzlePiece;             // パズルピース情報
 
-	//--------------------------------------------------
-	// スタート
-	//--------------------------------------------------
-	void Start()
+    
+
+    //--------------------------------------------------
+    // スタート
+    //--------------------------------------------------
+    void Start()
 	{
-		// パズルのピース生成
-		CreatePuzzlePiece();
+        // パズルのピース生成
+        CreatePuzzlePiece();
 	}
 
 	//--------------------------------------------------
@@ -37,6 +41,9 @@ public class PuzzleManager : MonoBehaviour
 	//--------------------------------------------------
 	void Update()
 	{
+        // カウント情報取得
+        fillCount = GetComponent<PieceList>().GetFillCount();
+        //Debug.Log(fillCount);
 
 	}
 
@@ -123,11 +130,27 @@ public class PuzzleManager : MonoBehaviour
 	}
 
 	// パズルの状態をリセット
-	public void AllClean()
+	/*public void AllClean()
 	{
-		for (int Cnt = 0; Cnt < PuzzlePiece.Length; Cnt++)
+        // ピース情報を取得
+        removablePieceList = GetComponent<PieceList>().GetRemovaleList();
+        
+        // プレイヤーもしくは敵のピースだったら
+       // if (puzzlePiece.transform.GetComponent<PuzzlePiece>().GetState() == DEFINE.PUZZLE_PIECE_STATE.PLAYER)
+        {
+            for (int nCount = 0; nCount < removablePieceList.Count; nCount++)
+            {
+                if (removablePieceList[nCount] != null)
+                {
+                    Destroy(removablePieceList[nCount]);
+                }
+            }
+        }
+		/*for (int Cnt = 0; Cnt < PuzzlePiece.Length; Cnt++)
 		{
 			PuzzlePiece[Cnt].GetComponent<PuzzlePiece>().SetState(DEFINE.PUZZLE_PIECE_STATE.NONE);
-		}
-	}
+		}*/
+	//}
+
+
 }

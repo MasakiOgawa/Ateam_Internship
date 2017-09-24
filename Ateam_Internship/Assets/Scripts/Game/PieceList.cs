@@ -5,12 +5,15 @@ using UnityEngine;
 
 public class PieceList : MonoBehaviour
 {
-   private GameObject startPiece;      // 最初にドラッグしたピース
+    private GameObject startPiece;      // 最初にドラッグしたピース
     private GameObject endPiece;        // 最後にドラッグしたピース
     private string currentName;         // 名前判定用のstring変数
     private int nCnt;                   // 塗った回数
 
-	//private GameObject[] Puzzle;	// パズルのピース情報
+    private static int nPrevRemoveCnt;
+    private int nRemoveCnt;
+
+    //private GameObject[] Puzzle;	// パズルのピース情報
 
     //削除するピースのリスト
     private List<GameObject> removablePieceList = new List<GameObject>();
@@ -20,10 +23,10 @@ public class PieceList : MonoBehaviour
 	// Use this for initialization
 	void Start()
     {
-		// パズルの情報を取得
-		//Puzzle = GetComponent<PuzzleManager>().GetPuzzle();
+        // パズルの情報を取得
+        //Puzzle = GetComponent<PuzzleManager>().GetPuzzle();
 
-		// カウンタ初期化
+        // カウンタ初期化
         nCnt = 0;
 
 		gameManager = transform.parent.GetComponent<GameManager>();
@@ -138,15 +141,13 @@ public class PieceList : MonoBehaviour
     // クリック終了時処理
     public void OnDragEnd()
     {
-        int nRemoveCnt = removablePieceList.Count;
-		
-		if (nRemoveCnt >= 2 && nRemoveCnt <= 8)
+        if (removablePieceList.Count >= 2 && removablePieceList.Count <= 8)
         {
-            for (int i = 0; i < nRemoveCnt; i++)
+            for (int i = 0; i < removablePieceList.Count; i++)
             {
-                ChangeColor(removablePieceList[i], new Color(0.5f, 0.5f, 0.5f, 1.0f));
+                //ChangeColor(removablePieceList[i], new Color(0.5f, 0.5f, 0.5f, 1.0f));
 
-				// プレイヤーのターンだったら
+                // プレイヤーのターンだったら
                 if (gameManager.GetGameState() == DEFINE.GAME_STATE.PLAYER_TURN)
                 {
 					// リストに格納されているピースの状態を変更
@@ -160,10 +161,33 @@ public class PieceList : MonoBehaviour
 				}
             }
 
-			// パズル終了フラグオン
-			gameManager.SetPuzzleFlag(true);
+            // 塗った数カウント
+            nCnt++;
+            nRemoveCnt = removablePieceList.Count;
+            nPrevRemoveCnt = removablePieceList.Count;
+            Debug.Log(nRemoveCnt);
+            Debug.Log(nPrevRemoveCnt);
 
-			nCnt++;
+
+            if (nCnt == 2)
+            {
+                for (int nCount = 0; nCount < nRemoveCnt; nCount++)
+                {
+                      Destroy(removablePieceList[nCount]);
+                }
+
+                for (int nCount = 0; nCount < nPrevRemoveCnt; nCount++)
+                {
+                    Destroy(removablePieceList[nCount]);
+                }
+
+                nCnt = 0;
+            }
+            
+
+            // パズル終了フラグオン
+            gameManager.SetPuzzleFlag(true);
+            
 
 			//// ターンを変更
 			//if (gameManager.GetGameState() == DEFINE.GAME_STATE.PLAYER_TURN)
@@ -180,7 +204,7 @@ public class PieceList : MonoBehaviour
         else
         {
             //色の透明度を戻す
-            for (int i = 0; i < nRemoveCnt; i++)
+            for (int i = 0; i < removablePieceList.Count; i++)
             {
                 ChangeColor(removablePieceList[i], new Color(0.5f, 0.5f, 0.5f, 1.0f));
             }
@@ -228,4 +252,10 @@ public class PieceList : MonoBehaviour
 		//削除対象オブジェクトリストの初期化
 		removablePieceList = new List<GameObject>();
 	}
+
+    // 塗った回数を取得
+    public int GetFillCount()
+    {
+        return nCnt;
+    }
 }

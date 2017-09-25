@@ -15,7 +15,10 @@ public class GameManager : MonoBehaviour
 
 	private bool PuzzleFlag;                    // パズルフラグ
 	private bool SkillFlag;                     // スキルフラグ
-	private bool AttackFlag;					// アタックフラグ
+	private bool AttackFlag;                    // アタックフラグ
+
+	[SerializeField] IconManager iconPlayer;		// プレイヤーアイコン
+	[SerializeField] IconManager iconEnemy;			// エネミーアイコン
 
 	//--------------------------------------------------
 	// スタート
@@ -56,6 +59,10 @@ public class GameManager : MonoBehaviour
 
 				//bool[] SkillActive;		// スキルが発動しているかどうか
 
+				// アイコンを切り替え
+				iconPlayer.enabled = true;
+				iconEnemy.enabled = false;
+
 				// パズルが終了していたら
 				if (PuzzleFlag == true)
 				{
@@ -79,11 +86,21 @@ public class GameManager : MonoBehaviour
 					AttackFlag = false;
 				}
 
+				// エネミーの体力が0だったら
+				if (enemy.GetPartyLife() <= 0)
+				{
+					FadeManager.Instance.LoadScene("ResultScene", 0.5f);
+				}
+
 				break;
 
 			case DEFINE.GAME_STATE.ENEMY_TURN:      // エネミーターン
 
 				//bool[] SkillActive;     // スキルが発動しているかどうか
+
+				// アイコンを切り替え
+				iconPlayer.enabled = false;
+				iconEnemy.enabled = true;
 
 				// パズルが終了していたら
 				if (PuzzleFlag == true)

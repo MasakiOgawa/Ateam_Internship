@@ -9,7 +9,7 @@ public class Line : MonoBehaviour
 	private LineRenderer lineRenderer;
 
 	//削除するボールのリスト
-	public List<GameObject> removablePieceList;
+	private List<GameObject> removablePieceList;
 
 	// Use this for initialization
 	void Start()

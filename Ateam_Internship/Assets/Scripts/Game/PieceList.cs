@@ -5,25 +5,28 @@ using UnityEngine;
 
 public class PieceList : MonoBehaviour
 {
-   private GameObject startPiece;      // 最初にドラッグしたピース
+    private GameObject startPiece;      // 最初にドラッグしたピース
     private GameObject endPiece;        // 最後にドラッグしたピース
     private string currentName;         // 名前判定用のstring変数
     private int nCnt;                   // 塗った回数
 
-	//private GameObject[] Puzzle;	// パズルのピース情報
+    private static int nPrevRemoveCnt;
+    private int nRemoveCnt;
+
+    //private GameObject[] Puzzle;	// パズルのピース情報
 
     //削除するピースのリスト
-    private List<GameObject> removablePieceList = new List<GameObject>();
+    public List<GameObject> removablePieceList = new List<GameObject>();
 
 	private GameManager gameManager;		// ゲームマネージャー情報
 
 	// Use this for initialization
 	void Start()
     {
-		// パズルの情報を取得
-		//Puzzle = GetComponent<PuzzleManager>().GetPuzzle();
+        // パズルの情報を取得
+        //Puzzle = GetComponent<PuzzleManager>().GetPuzzle();
 
-		// カウンタ初期化
+        // カウンタ初期化
         nCnt = 0;
 
 		gameManager = transform.parent.GetComponent<GameManager>();
@@ -87,6 +90,7 @@ public class PieceList : MonoBehaviour
     public void OnDragging()
     {
 		RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
+		//RaycastHit2D hit01 = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.GetTouch(0).position), Vector2.zero);
 		bool ListFlag = false;      // リスト比較フラグ
 
 		if (hit.collider != null)
@@ -116,18 +120,21 @@ public class PieceList : MonoBehaviour
 								}
 							}
 
-							// リストにまだ格納されていなかったら
-							if (ListFlag == false)
-							{
-								//削除対象のオブジェクトを格納
-								endPiece = hitObj;
-								PushToList(hitObj);
-							}
-							else
-							{
-								endPiece = removablePieceList[removablePieceList.Count - 2];
-								RemoveToList(removablePieceList[removablePieceList.Count - 1]);
-							}
+                            if(ListFlag == true)
+                            {
+                                endPiece = removablePieceList[removablePieceList.Count - 2];
+                                RemoveToList(removablePieceList[removablePieceList.Count - 1]);
+                            }
+                            else if(ListFlag == false)
+                            {
+                                // リストの要素が最大数未満だったら
+                                if (removablePieceList.Count < 8)
+                                {
+                                    //削除対象のオブジェクトを格納
+                                    endPiece = hitObj;
+                                    PushToList(hitObj);
+                                }
+                            }
 						}
 					}
 				}
@@ -138,15 +145,13 @@ public class PieceList : MonoBehaviour
     // クリック終了時処理
     public void OnDragEnd()
     {
-        int nRemoveCnt = removablePieceList.Count;
-		
-		if (nRemoveCnt >= 2 && nRemoveCnt <= 8)
+        if (removablePieceList.Count >= 2 && removablePieceList.Count <= 8)
         {
-            for (int i = 0; i < nRemoveCnt; i++)
+            for (int i = 0; i < removablePieceList.Count; i++)
             {
-                ChangeColor(removablePieceList[i], new Color(0.5f, 0.5f, 0.5f, 1.0f));
+                //ChangeColor(removablePieceList[i], new Color(0.5f, 0.5f, 0.5f, 1.0f));
 
-				// プレイヤーのターンだったら
+                // プレイヤーのターンだったら
                 if (gameManager.GetGameState() == DEFINE.GAME_STATE.PLAYER_TURN)
                 {
 					// リストに格納されているピースの状態を変更
@@ -160,27 +165,29 @@ public class PieceList : MonoBehaviour
 				}
             }
 
-			// パズル終了フラグオン
-			gameManager.SetPuzzleFlag(true);
+            // 塗った数カウント
+            nCnt++;
 
-			nCnt++;
+			// 4回塗られたら
+			if (nCnt == 4)
+			{
+				// ピースをクリア
+				GetComponent<PuzzleManager>().AllClean();
 
-			//// ターンを変更
-			//if (gameManager.GetGameState() == DEFINE.GAME_STATE.PLAYER_TURN)
-			//{
-			//	// エネミーターンに変更
-			//	gameManager.SetGameState(DEFINE.GAME_STATE.ENEMY_TURN);
-			//}
-			//else if (gameManager.GetGameState() == DEFINE.GAME_STATE.ENEMY_TURN)
-			//{
-			//	// プレイヤーのターンに変更
-			//	gameManager.SetGameState(DEFINE.GAME_STATE.PLAYER_TURN);
-			//}
+				// ピースを生成
+				GetComponent<PuzzleManager>().CreateAllPiece();
+
+				// カウンタ初期化
+				nCnt = 0;
+			}
+
+            // パズル終了フラグオン
+            gameManager.SetPuzzleFlag(true);
 		}
         else
         {
             //色の透明度を戻す
-            for (int i = 0; i < nRemoveCnt; i++)
+            for (int i = 0; i < removablePieceList.Count; i++)
             {
                 ChangeColor(removablePieceList[i], new Color(0.5f, 0.5f, 0.5f, 1.0f));
             }
@@ -226,6 +233,12 @@ public class PieceList : MonoBehaviour
 		endPiece = null;
 
 		//削除対象オブジェクトリストの初期化
-		removablePieceList = new List<GameObject>();
+		removablePieceList.Clear();/* = new List<GameObject>();*/
 	}
+
+    // 塗った回数を取得
+    public int GetFillCount()
+    {
+        return nCnt;
+    }
 }

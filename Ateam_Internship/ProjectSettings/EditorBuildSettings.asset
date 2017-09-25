@@ -16,4 +16,7 @@ EditorBuildSettings:
     guid: 3eb2afcb98d3bd042b58a1093180fb74
   - enabled: 1
     path: Assets/Scenes/QuestScene.unity
+    guid: b88660235fab301488847b14cfe7b39f
+  - enabled: 1
+    path: Assets/Scenes/ResultScene.unity
     guid: 00000000000000000000000000000000

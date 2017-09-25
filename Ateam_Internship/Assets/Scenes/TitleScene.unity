@@ -160,7 +160,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -949041871
-  m_SortingLayer: -2
+  m_SortingLayer: -3
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: ceae11b41c37255408e82361c664f7f0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -195,6 +195,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6789fcedc6f462848883ab4fe262fe26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  FadeTime: 0.5
 --- !u!1001 &1458858444
 Prefab:
   m_ObjectHideFlags: 0
@@ -248,30 +249,35 @@ Prefab:
         type: 2}
       propertyPath: tapEffect
       value: 
-      objectReference: {fileID: 1458858445}
+      objectReference: {fileID: 0}
     - target: {fileID: 114610171973997342, guid: 54fcedba25d454649a6543da96c3aee4,
         type: 2}
       propertyPath: tapEffect
       value: 
-      objectReference: {fileID: 1458858446}
+      objectReference: {fileID: 0}
     - target: {fileID: 199406085168876582, guid: 54fcedba25d454649a6543da96c3aee4,
         type: 2}
       propertyPath: m_Materials.Array.data[1]
       value: 
       objectReference: {fileID: 2100000, guid: 0adf342aad12a984ea45e8e5eecd68b2, type: 2}
-    m_RemovedComponents: []
+    - target: {fileID: 58574071153851164, guid: 54fcedba25d454649a6543da96c3aee4,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 212621121362984900, guid: 54fcedba25d454649a6543da96c3aee4,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4080184236763412, guid: 54fcedba25d454649a6543da96c3aee4, type: 2}
+      propertyPath: m_RootOrder
+      value: 6
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 58567117212637030, guid: 54fcedba25d454649a6543da96c3aee4, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 54fcedba25d454649a6543da96c3aee4, type: 2}
   m_IsPrefabParent: 0
---- !u!198 &1458858445 stripped
-ParticleSystem:
-  m_PrefabParentObject: {fileID: 198550531183004732, guid: 54fcedba25d454649a6543da96c3aee4,
-    type: 2}
-  m_PrefabInternal: {fileID: 1458858444}
---- !u!198 &1458858446 stripped
-ParticleSystem:
-  m_PrefabParentObject: {fileID: 198376214988756252, guid: 54fcedba25d454649a6543da96c3aee4,
-    type: 2}
-  m_PrefabInternal: {fileID: 1458858444}
 --- !u!1001 &1520026892
 Prefab:
   m_ObjectHideFlags: 0
@@ -360,7 +366,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1013435457
-  m_SortingLayer: -1
+  m_SortingLayer: -2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: e87f4948ffb8ee44295084a913c3bc51, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -485,6 +491,11 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 20282333947587388, guid: be77bfe3d4c65d746ac4ec9136d0ae9d,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: be77bfe3d4c65d746ac4ec9136d0ae9d, type: 2}
   m_IsPrefabParent: 0
@@ -500,7 +511,6 @@ GameObject:
   - component: {fileID: 1946026800}
   - component: {fileID: 1946026799}
   - component: {fileID: 1946026798}
-  - component: {fileID: 1946026803}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -578,17 +588,3 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1946026803
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1946026797}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -1690312454, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_EventMask:
-    serializedVersion: 2
-    m_Bits: 4294967295

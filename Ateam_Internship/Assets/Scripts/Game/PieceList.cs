@@ -120,22 +120,21 @@ public class PieceList : MonoBehaviour
 								}
 							}
 
-							// リストの要素が最大数未満だったら
-							if (removablePieceList.Count < 8)
-							{
-								// リストにまだ格納されていなかったら
-								if (ListFlag == false)
-								{
-									//削除対象のオブジェクトを格納
-									endPiece = hitObj;
-									PushToList(hitObj);
-								}
-							}
-							else
-							{
-								endPiece = removablePieceList[removablePieceList.Count - 2];
-								RemoveToList(removablePieceList[removablePieceList.Count - 1]);
-							}
+                            if(ListFlag == true)
+                            {
+                                endPiece = removablePieceList[removablePieceList.Count - 2];
+                                RemoveToList(removablePieceList[removablePieceList.Count - 1]);
+                            }
+                            else if(ListFlag == false)
+                            {
+                                // リストの要素が最大数未満だったら
+                                if (removablePieceList.Count < 8)
+                                {
+                                    //削除対象のオブジェクトを格納
+                                    endPiece = hitObj;
+                                    PushToList(hitObj);
+                                }
+                            }
 						}
 					}
 				}

@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class UI_Stage1 : MonoBehaviour {
 
-    public float FadeTime;
+    public float FadeTime = 0.5f;
     public void OnClick()
     {
-        //FadeManager.Instance.LoadScene("GameScene", FadeTime);
+        FadeManager.Instance.LoadScene("GameScene", FadeTime);
     }
 }

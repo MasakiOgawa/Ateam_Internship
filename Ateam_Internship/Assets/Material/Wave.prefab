@@ -21,9 +21,9 @@ GameObject:
   - component: {fileID: 4080184236763412}
   - component: {fileID: 198453579494535310}
   - component: {fileID: 199457369396377410}
-  - component: {fileID: 58567117212637030}
   - component: {fileID: 114111960948563348}
   - component: {fileID: 212621121362984900}
+  - component: {fileID: 114892367409790596}
   m_Layer: 0
   m_Name: Wave
   m_TagString: Untagged
@@ -46,6 +46,7 @@ GameObject:
   - component: {fileID: 198323613010176574}
   - component: {fileID: 199539767289937094}
   - component: {fileID: 114393680380712642}
+  - component: {fileID: 114081105279728862}
   m_Layer: 0
   m_Name: TapEffect
   m_TagString: Untagged
@@ -100,21 +101,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!58 &58567117212637030
-CircleCollider2D:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1001977114276690}
-  m_Enabled: 0
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 1.75
 --- !u!58 &58574071153851164
 CircleCollider2D:
   m_ObjectHideFlags: 1
@@ -130,6 +116,17 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
+--- !u!114 &114081105279728862
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1130537304403222}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8680cb7ebb1fd4a448e666bb4219b9dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114111960948563348
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -141,7 +138,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 001f1d72bc78ff649b20d589252c4240, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tapEffect: {fileID: 198453579494535310}
+  tapEffect: {fileID: 1001977114276690}
   _camera: {fileID: 20282333947587388, guid: be77bfe3d4c65d746ac4ec9136d0ae9d, type: 2}
 --- !u!114 &114393680380712642
 MonoBehaviour:
@@ -154,7 +151,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 001f1d72bc78ff649b20d589252c4240, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tapEffect: {fileID: 198323613010176574}
+  tapEffect: {fileID: 1130537304403222}
   _camera: {fileID: 20282333947587388, guid: be77bfe3d4c65d746ac4ec9136d0ae9d, type: 2}
 --- !u!114 &114882570253988520
 MonoBehaviour:
@@ -165,6 +162,17 @@ MonoBehaviour:
   m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d1d73580e2862714d9f2cfa0c99b1f3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114892367409790596
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1001977114276690}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8680cb7ebb1fd4a448e666bb4219b9dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!198 &198323613010176574
@@ -224,7 +232,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 490972250
+  randomSeed: 1872965722
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -3361,7 +3369,7 @@ ParticleSystem:
   moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 240210325
+  randomSeed: 918698589
   InitialModule:
     serializedVersion: 3
     enabled: 1

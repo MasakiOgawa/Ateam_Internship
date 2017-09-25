@@ -23,6 +23,7 @@ public class PlayTouchPanel : MonoBehaviour, IPointerDownHandler, IPointerUpHand
     {
     }
 
+    /*
     void Start()
     {
         //parent = transform.parent.gameObject;
@@ -39,7 +40,7 @@ public class PlayTouchPanel : MonoBehaviour, IPointerDownHandler, IPointerUpHand
         //タップ時
         CheckTap();
     }
-
+    
     void CheckTap()
     {
         foreach (Touch t in Input.touches)
@@ -50,7 +51,7 @@ public class PlayTouchPanel : MonoBehaviour, IPointerDownHandler, IPointerUpHand
             }
         }
     }
-
+    */
     //タップエフェクトを出す
     void NewTapEffect(Vector2 pos)
     {

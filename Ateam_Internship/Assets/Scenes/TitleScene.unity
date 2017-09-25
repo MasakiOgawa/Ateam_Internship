@@ -196,6 +196,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   FadeTime: 0.5
+  ToFadeTime: 0.3
 --- !u!1001 &1458858444
 Prefab:
   m_ObjectHideFlags: 0

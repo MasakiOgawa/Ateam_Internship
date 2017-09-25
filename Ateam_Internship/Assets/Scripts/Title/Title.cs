@@ -5,7 +5,9 @@ using UnityEngine;
 public class Title : MonoBehaviour 
 {
     public float FadeTime;
+    public float ToFadeTime; // タップしてからフェードまでの時間
 
+    
 	// Use this for initialization
 	void Start ()
     {
@@ -16,7 +18,9 @@ public class Title : MonoBehaviour
     {
         if (Input.GetMouseButton(0))
         {
-            FadeManager.Instance.LoadScene("HomeScene", FadeTime);
+            
+            StartCoroutine("hogehoge");
+         
         }
         if (Input.GetMouseButton(1))
         { 
@@ -24,4 +28,13 @@ public class Title : MonoBehaviour
             //特に処理なし
         }
 	}
+
+    IEnumerator hogehoge()
+    {
+
+        yield return new WaitForSeconds(ToFadeTime);
+        FadeManager.Instance.LoadScene("HomeScene", FadeTime);
+    }
+
+
 }

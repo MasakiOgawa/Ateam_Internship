@@ -8,16 +8,17 @@ public class Enemy : MonoBehaviour
 	private float PartyLife;                                // パーティのライフ
 	private float PartyAttack;                                // パーティのアタック
 	[SerializeField] private GaugeController lifeGauge;      // 体力ゲージ
-	[SerializeField] private Player player;						// プレイヤー情報
+	[SerializeField] private Player player;                     // プレイヤー情報
+	[SerializeField] private PieceList pieceList;				// ピース情報
 
 	// Use this for initialization
 	void Start()
 	{
 		EnemyParty = new DEFINE.Party(
-			new DEFINE.Character(100, 10, DEFINE.PUZZLE_PIECE_SUIT.SPADE, DEFINE.PUZZLE_PIECE_SUIT.SPADE),           // リーダー
-			new DEFINE.Character(100, 10, DEFINE.PUZZLE_PIECE_SUIT.DIAMOND, DEFINE.PUZZLE_PIECE_SUIT.DIAMOND),		// キャラ1(アイコン 左)
-			new DEFINE.Character(100, 10, DEFINE.PUZZLE_PIECE_SUIT.HEART, DEFINE.PUZZLE_PIECE_SUIT.HEART),        // キャラ2(アイコン 中)
-			new DEFINE.Character(100, 10, DEFINE.PUZZLE_PIECE_SUIT.CLUB, DEFINE.PUZZLE_PIECE_SUIT.CLUB));          // キャラ3(アイコン 右)
+			new DEFINE.Character(100, 20, DEFINE.PUZZLE_PIECE_SUIT.SPADE, DEFINE.PUZZLE_PIECE_SUIT.SPADE),           // リーダー
+			new DEFINE.Character(100, 20, DEFINE.PUZZLE_PIECE_SUIT.DIAMOND, DEFINE.PUZZLE_PIECE_SUIT.DIAMOND),		// キャラ1(アイコン 左)
+			new DEFINE.Character(100, 20, DEFINE.PUZZLE_PIECE_SUIT.HEART, DEFINE.PUZZLE_PIECE_SUIT.HEART),        // キャラ2(アイコン 中)
+			new DEFINE.Character(100, 20, DEFINE.PUZZLE_PIECE_SUIT.CLUB, DEFINE.PUZZLE_PIECE_SUIT.CLUB));          // キャラ3(アイコン 右)
 
 		// パーティのライフを設定
 		PartyLife = EnemyParty.Chara_0.Life + EnemyParty.Chara_1.Life + EnemyParty.Chara_2.Life + EnemyParty.Chara_3.Life;
@@ -56,6 +57,10 @@ public class Enemy : MonoBehaviour
 	// エネミーの攻撃
 	public void EnemyAttack()
 	{
+		// 消した個数を取得
+		int PieceNum = pieceList.GetListCount();
+
+		// 攻撃
 		player.SubPartyLife(PartyAttack);
 	}
 }

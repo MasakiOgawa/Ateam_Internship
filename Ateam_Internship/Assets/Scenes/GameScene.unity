@@ -2343,6 +2343,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lifeGauge: {fileID: 1949973339}
   enemy: {fileID: 971446226}
+  pieceList: {fileID: 1716420797}
 --- !u!114 &971446226
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2356,6 +2357,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lifeGauge: {fileID: 1663847770}
   player: {fileID: 971446225}
+  pieceList: {fileID: 1716420797}
 --- !u!1 &1015157088
 GameObject:
   m_ObjectHideFlags: 0

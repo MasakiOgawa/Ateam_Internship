@@ -183,6 +183,9 @@ public class PieceList : MonoBehaviour
 
             // パズル終了フラグオン
             gameManager.SetPuzzleFlag(true);
+
+			// 塗った個数を保存
+			nRemoveCnt = removablePieceList.Count;
 		}
         else
         {
@@ -241,4 +244,10 @@ public class PieceList : MonoBehaviour
     {
         return nCnt;
     }
+
+	// 塗った個数を取得
+	public int GetListCount()
+	{
+		return nRemoveCnt;
+	}
 }

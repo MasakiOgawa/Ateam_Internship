@@ -23,6 +23,9 @@ public class GameManager : MonoBehaviour
 	[SerializeField] private IconManager iconPlayer;		// プレイヤーアイコン
 	[SerializeField] private IconManager iconEnemy;			// エネミーアイコン
     [SerializeField] private UiText uiText;
+    [SerializeField] private EffectManager em;
+    [SerializeField] int hoge;
+    [SerializeField] private GameObject normalObj;
 
     //--------------------------------------------------
     // スタート
@@ -52,8 +55,8 @@ public class GameManager : MonoBehaviour
 			Application.Quit();
 		}
 
-		// ゲーム状態管理
-		switch (GameState)
+        // ゲーム状態管理
+        switch (GameState)
 		{
 			case DEFINE.GAME_STATE.NONE:				// 何もない
 
@@ -72,7 +75,69 @@ public class GameManager : MonoBehaviour
 					if(SkillFlag == false)
 					{
 						SkillActive = skillChecker.SkillCheckList(player.GetPlayerParty(), PieceList);
-						SkillFlag = true;
+                        //Debug.Log(SkillActive[0] );
+
+                        if(SkillActive[0] == true)
+                        {
+                            GameObject gameObj;
+                            gameObj = Instantiate(normalObj, new Vector3(0, 0, 0), new Quaternion(0, 0, 0, 0), transform);
+                            gameObj.GetComponent<NormalEffect>().SetPoint(new Vector3(-1.4f, 1.65f, 0), new Vector3(-6, 3.3f, 0), new Vector3(0.46f, 1.97f, 0), new Vector3(1.42f, 2.98f, 0), 0);
+                           // Debug.Log("0");
+                        }
+                        else if(SkillActive[0] == false)
+                        {
+                            GameObject gameObj;
+                            gameObj = Instantiate(normalObj, new Vector3(0, 0, 0), new Quaternion(0, 0, 0, 0), transform);
+                            gameObj.GetComponent<NormalEffect>().SetPoint(new Vector3(-1.4f, 1.65f, 0), new Vector3(-6, 3.3f, 0), new Vector3(0.46f, 1.97f, 0), new Vector3(1.42f, 2.98f, 0), 5);
+                           // Debug.Log("1");
+                        }
+
+                        if (SkillActive[1] == true)
+                        {
+                            GameObject gameObj;
+                            gameObj = Instantiate(normalObj, new Vector3(0, 0, 0), new Quaternion(0, 0, 0, 0), transform);
+                            gameObj.GetComponent<NormalEffect>().SetPoint(new Vector3(-1.4f, 1.65f, 0), new Vector3(-6, 3.3f, 0), new Vector3(0.46f, 1.97f, 0), new Vector3(1.42f, 2.98f, 0), 1);
+                           // Debug.Log("2");
+                        }
+                        else if (SkillActive[1] == false)
+                        {
+                            GameObject gameObj;
+                            gameObj = Instantiate(normalObj, new Vector3(0, 0, 0), new Quaternion(0, 0, 0, 0), transform);
+                            gameObj.GetComponent<NormalEffect>().SetPoint(new Vector3(-1.4f, 1.65f, 0), new Vector3(-6, 3.3f, 0), new Vector3(0.46f, 1.97f, 0), new Vector3(1.42f, 2.98f, 0), 5);
+                           // Debug.Log("3");
+                        }
+
+                        if (SkillActive[2] == true)
+                        {
+                            GameObject gameObj;
+                            gameObj = Instantiate(normalObj, new Vector3(0, 0, 0), new Quaternion(0, 0, 0, 0), transform);
+                            gameObj.GetComponent<NormalEffect>().SetPoint(new Vector3(-1.4f, 1.65f, 0), new Vector3(-6, 3.3f, 0), new Vector3(0.46f, 1.97f, 0), new Vector3(1.42f, 2.98f, 0), 2);
+                            //Debug.Log("4");
+                        }
+                        else if (SkillActive[2] == false)
+                        {
+                            GameObject gameObj;
+                            gameObj = Instantiate(normalObj, new Vector3(0, 0, 0), new Quaternion(0, 0, 0, 0), transform);
+                            gameObj.GetComponent<NormalEffect>().SetPoint(new Vector3(-1.4f, 1.65f, 0), new Vector3(-6, 3.3f, 0), new Vector3(0.46f, 1.97f, 0), new Vector3(1.42f, 2.98f, 0), 5);
+                            //Debug.Log("5");
+                        }
+
+                        if (SkillActive[3] == true)
+                        {
+                            GameObject gameObj;
+                            gameObj = Instantiate(normalObj, new Vector3(0, 0, 0), new Quaternion(0, 0, 0, 0), transform);
+                            gameObj.GetComponent<NormalEffect>().SetPoint(new Vector3(-1.4f, 1.65f, 0), new Vector3(-6, 3.3f, 0), new Vector3(0.46f, 1.97f, 0), new Vector3(1.42f, 2.98f, 0), 3);
+                            //Debug.Log("6");
+                        }
+                        else if (SkillActive[3] == false)
+                        {
+                            GameObject gameObj;
+                            gameObj = Instantiate(normalObj, new Vector3(0, 0, 0), new Quaternion(0, 0, 0, 0), transform);
+                            gameObj.GetComponent<NormalEffect>().SetPoint(new Vector3(-1.4f, 1.65f, 0), new Vector3(-6, 3.3f, 0), new Vector3(0.46f, 1.97f, 0), new Vector3(1.42f, 2.98f, 0), 5);
+                            //Debug.Log("7");
+                        }
+
+                        SkillFlag = true;
 					}
 
 					// 攻撃フラグオンだったら
@@ -80,8 +145,6 @@ public class GameManager : MonoBehaviour
 					{
 						player.PlayerAttack();
 						AttackFlag = true;
-                        EffectFlag = true;
-
                     }
 
                     // エフェクトが終わったら
@@ -176,4 +239,9 @@ public class GameManager : MonoBehaviour
 	{
 		return PuzzleFlag;
 	}
+
+    public void SetEffectFlag(bool setFlag)
+    {
+        EffectFlag = setFlag;
+    }
 }

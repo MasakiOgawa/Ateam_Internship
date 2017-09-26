@@ -26,7 +26,6 @@ public class UiText : MonoBehaviour {
         nSetCnt = 0;
         bAlphaOn = false;
         bFirstTime = true;
-        
 
         // スプライトレンダラー取得
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -81,8 +80,6 @@ public class UiText : MonoBehaviour {
             }
         }
 
-        
-
         spriteRenderer.color = new Color(1.0f, 1.0f, 1.0f, fAlpha);
     }
         
@@ -100,5 +97,10 @@ public class UiText : MonoBehaviour {
     public bool GetAlphaOn()
     {
         return bAlphaOn;
+    }
+
+    public bool GetShowUi()
+    {
+        return bFirstTime;
     }
 }

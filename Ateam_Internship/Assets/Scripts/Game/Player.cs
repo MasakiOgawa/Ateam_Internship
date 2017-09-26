@@ -15,10 +15,10 @@ public class Player : MonoBehaviour
 	void Start()
 	{
 		PlayerParty = new DEFINE.Party(
-			new DEFINE.Character(100, 10, DEFINE.PUZZLE_PIECE_SUIT.SPADE, DEFINE.PUZZLE_PIECE_SUIT.CLUB),			// リーダー
-			new DEFINE.Character(100, 10, DEFINE.PUZZLE_PIECE_SUIT.DIAMOND, DEFINE.PUZZLE_PIECE_SUIT.HEART),      // キャラ1(アイコン 左)
-			new DEFINE.Character(100, 10, DEFINE.PUZZLE_PIECE_SUIT.HEART, DEFINE.PUZZLE_PIECE_SUIT.DIAMOND),			// キャラ2(アイコン 中)
-			new DEFINE.Character(100, 10, DEFINE.PUZZLE_PIECE_SUIT.CLUB, DEFINE.PUZZLE_PIECE_SUIT.SPADE));			// キャラ3(アイコン 右)
+			new DEFINE.Character(100, 10, DEFINE.PUZZLE_PIECE_SUIT.SPADE, DEFINE.PUZZLE_PIECE_SUIT.SPADE),			// リーダー
+			new DEFINE.Character(100, 10, DEFINE.PUZZLE_PIECE_SUIT.SPADE, DEFINE.PUZZLE_PIECE_SUIT.SPADE),      // キャラ1(アイコン 左)
+			new DEFINE.Character(100, 10, DEFINE.PUZZLE_PIECE_SUIT.SPADE, DEFINE.PUZZLE_PIECE_SUIT.SPADE),			// キャラ2(アイコン 中)
+			new DEFINE.Character(100, 10, DEFINE.PUZZLE_PIECE_SUIT.SPADE, DEFINE.PUZZLE_PIECE_SUIT.SPADE));			// キャラ3(アイコン 右)
 
 		// パーティの総ステータスを設定
 		PartyLife = PlayerParty.Chara_0.Life + PlayerParty.Chara_1.Life + PlayerParty.Chara_2.Life + PlayerParty.Chara_3.Life;

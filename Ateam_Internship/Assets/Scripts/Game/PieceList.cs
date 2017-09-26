@@ -13,15 +13,15 @@ public class PieceList : MonoBehaviour
     private static int nPrevRemoveCnt;
     private int nRemoveCnt;
 
-    //private GameObject[] Puzzle;	// パズルのピース情報
-
     //削除するピースのリスト
     public List<GameObject> removablePieceList = new List<GameObject>();
 
 	private GameManager gameManager;		// ゲームマネージャー情報
 
-	// Use this for initialization
-	void Start()
+    [SerializeField] private UiText uiText;
+
+    // Use this for initialization
+    void Start()
     {
         // パズルの情報を取得
         //Puzzle = GetComponent<PuzzleManager>().GetPuzzle();
@@ -36,21 +36,24 @@ public class PieceList : MonoBehaviour
     // Update is called once per frame
     void Update()
 	{
-		if (Input.GetMouseButtonDown(0) /*| Input.GetTouch(0).phase == TouchPhase.Began*/ && startPiece == null ) // タッチにかえる
-		{
-			// クリック開始
-			OnDragStart();
-		}
-		else if (Input.GetMouseButtonUp(0) /*| Input.GetTouch(0).phase == TouchPhase.Ended*/)
-		{
-			//クリックを終えた時
-			OnDragEnd();
-		}
-		else if (startPiece != null /*&& Input.GetTouch(0).phase == TouchPhase.Moved*/)
-		{
-			// クリック中
-			OnDragging();
-		}
+        if (uiText.GetShowUi() == false)
+        {
+            if (Input.GetMouseButtonDown(0) /*| Input.GetTouch(0).phase == TouchPhase.Began*/ && startPiece == null) // タッチにかえる
+            {
+                // クリック開始
+                OnDragStart();
+            }
+            else if (Input.GetMouseButtonUp(0) /*| Input.GetTouch(0).phase == TouchPhase.Ended*/)
+            {
+                //クリックを終えた時
+                OnDragEnd();
+            }
+            else if (startPiece != null /*&& Input.GetTouch(0).phase == TouchPhase.Moved*/)
+            {
+                // クリック中
+                OnDragging();
+            }
+        }
 	}
 
 	// クリック開始処理

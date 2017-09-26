@@ -16,23 +16,27 @@ public class GameManager : MonoBehaviour
 	private bool PuzzleFlag;                    // パズルフラグ
 	private bool SkillFlag;                     // スキルフラグ
 	private bool AttackFlag;                    // アタックフラグ
+    private bool EffectFlag;
 
-	[SerializeField] IconManager iconPlayer;		// プレイヤーアイコン
-	[SerializeField] IconManager iconEnemy;			// エネミーアイコン
+    
 
-	//--------------------------------------------------
-	// スタート
-	//--------------------------------------------------
-	void Start()
+	[SerializeField] private IconManager iconPlayer;		// プレイヤーアイコン
+	[SerializeField] private IconManager iconEnemy;			// エネミーアイコン
+    [SerializeField] private UiText uiText;
+
+    //--------------------------------------------------
+    // スタート
+    //--------------------------------------------------
+    void Start()
 	{
 		GameState = DEFINE.GAME_STATE.PLAYER_TURN;                  // ゲーム状態
 		player = GetComponent<Player>();                            // プレイヤー情報を取得
 		enemy = GetComponent<Enemy>();								// エネミー情報を取得
 		PieceList = GetComponentInChildren<PieceList>();                      // ピースのリストを取得
-		skillChecker = GetComponent<SkillChecker>();				// スキル情報を取得
+		skillChecker = GetComponent<SkillChecker>();                // スキル情報を取得
 
-		//Screen.SetResolution(340, 640, false, 60);
-	}
+        //Screen.SetResolution(340, 640, false, 60);
+    }
 
 
 	//--------------------------------------------------
@@ -57,10 +61,8 @@ public class GameManager : MonoBehaviour
 
 			case DEFINE.GAME_STATE.PLAYER_TURN:     // P1ターン
 
-				//bool[] SkillActive;		// スキルが発動しているかどうか
-
-				// アイコンを切り替え
-				iconPlayer.enabled = true;
+                // アイコンを切り替え
+                iconPlayer.enabled = true;
 				iconEnemy.enabled = false;
 
 				// パズルが終了していたら
@@ -78,13 +80,22 @@ public class GameManager : MonoBehaviour
 					{
 						player.PlayerAttack();
 						AttackFlag = true;
-					}
-					
-					SetGameState(DEFINE.GAME_STATE.ENEMY_TURN);
-					PuzzleFlag = false;
-					SkillFlag = false;
-					AttackFlag = false;
-				}
+                        EffectFlag = true;
+
+                    }
+
+                    // エフェクトが終わったら
+                    if (EffectFlag == true)
+                    {
+                        SetGameState(DEFINE.GAME_STATE.ENEMY_TURN);
+                        uiText.SetUiNum(1);
+
+                        PuzzleFlag = false;
+                        SkillFlag = false;
+                        AttackFlag = false;
+                        EffectFlag = false;
+                    }
+                }
 
 				// エネミーの体力が0だったら
 				if (enemy.GetPartyLife() <= 0)
@@ -117,12 +128,22 @@ public class GameManager : MonoBehaviour
 					{
 						enemy.EnemyAttack();
 						AttackFlag = true;
-					}
+                        EffectFlag = true;
+                    }
 
-					SetGameState(DEFINE.GAME_STATE.PLAYER_TURN);
-					PuzzleFlag = false;
-					SkillFlag = false;
-					AttackFlag = false;
+                    // エフェクトが終わったら
+                    if(EffectFlag == true)
+                    {
+                        SetGameState(DEFINE.GAME_STATE.PLAYER_TURN);
+                        uiText.SetUiNum(0);
+
+                        PuzzleFlag = false;
+                        SkillFlag = false;
+                        AttackFlag = false;
+                        EffectFlag = false;
+                    }
+
+					
 				}
 				break;
 

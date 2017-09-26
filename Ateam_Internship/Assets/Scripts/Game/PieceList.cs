@@ -36,17 +36,17 @@ public class PieceList : MonoBehaviour
     // Update is called once per frame
     void Update()
 	{
-		if (Input.GetMouseButtonDown(0) && startPiece == null)
+		if (Input.GetMouseButtonDown(0) /*| Input.GetTouch(0).phase == TouchPhase.Began*/ && startPiece == null ) // タッチにかえる
 		{
 			// クリック開始
 			OnDragStart();
 		}
-		else if (Input.GetMouseButtonUp(0))
+		else if (Input.GetMouseButtonUp(0) /*| Input.GetTouch(0).phase == TouchPhase.Ended*/)
 		{
 			//クリックを終えた時
 			OnDragEnd();
 		}
-		else if (startPiece != null)
+		else if (startPiece != null /*&& Input.GetTouch(0).phase == TouchPhase.Moved*/)
 		{
 			// クリック中
 			OnDragging();

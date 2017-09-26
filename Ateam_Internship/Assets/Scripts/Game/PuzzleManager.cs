@@ -26,13 +26,11 @@ public class PuzzleManager : MonoBehaviour
     [SerializeField] private GameObject PuzzlePiece_Prehab;     // パズルのプレハブ情報
 	//[SerializeField] private PieceList PieceList;				// パズルピース情報
 
-    
-
     //--------------------------------------------------
     // スタート
     //--------------------------------------------------
     void Start()
-	{
+	{ 
 		// 座標情報初期化
 		PiecePos = new List<Vector3>();
 

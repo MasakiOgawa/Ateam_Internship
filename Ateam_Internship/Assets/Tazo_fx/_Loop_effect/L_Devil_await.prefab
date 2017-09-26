@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 19800000}
   - component: {fileID: 19900000}
   - component: {fileID: 8200000}
+  - component: {fileID: 114466286922689542}
   m_Layer: 0
   m_Name: L_Devil_await
   m_TagString: explosion
@@ -15719,3 +15720,14 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 100000}
   m_IsPrefabParent: 1
+--- !u!114 &114466286922689542
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8680cb7ebb1fd4a448e666bb4219b9dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Title : MonoBehaviour 
 {
-    public float FadeTime;
-
+   
+	
 	// Use this for initialization
 	void Start ()
     {
@@ -15,16 +15,6 @@ public class Title : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
     {
-        if (Input.GetMouseButton(0))
-        {
-            FadeManager.Instance.LoadScene("HomeScene", FadeTime);
-        }
-        if (Input.GetMouseButton(1))
-        { 
-            //テスト用
-            //特に処理なし
-        }
-
         transform.Translate(-0.01f, 0, 0);
         if (transform.position.x < -11f)
         {

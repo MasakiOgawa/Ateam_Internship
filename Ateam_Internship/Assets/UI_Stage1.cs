@@ -5,8 +5,11 @@ using UnityEngine;
 public class UI_Stage1 : MonoBehaviour {
 
     public float FadeTime = 0.5f;
-    public void OnClick()
+	[SerializeField] SEManager SE;
+
+	public void OnClick()
     {
-        FadeManager.Instance.LoadScene("GameScene", FadeTime);
+		SE.PlaySE(4);
+		FadeManager.Instance.LoadScene("GameScene", FadeTime);
     }
 }

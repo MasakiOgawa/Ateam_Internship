@@ -5,8 +5,11 @@ using UnityEngine;
 public class UI_WingQuest : MonoBehaviour {
 
     public float FadeTime;
-    public void OnClick()
+	[SerializeField] SEManager SE;
+
+	public void OnClick()
     {
-        FadeManager.Instance.LoadScene("QuestScene", FadeTime);
+		SE.PlaySE(4);
+		FadeManager.Instance.LoadScene("QuestScene", FadeTime);
     }
 }

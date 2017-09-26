@@ -5,9 +5,14 @@ using UnityEngine;
 public class UI_Quest : MonoBehaviour
 {
     public float FadeTime;
-    public void OnClick() {
-        FadeManager.Instance.LoadScene("QuestScene", FadeTime);
-    }
+
+	[SerializeField] SEManager SE;
+
+	public void OnClick()
+	{
+		SE.PlaySE(4);
+		FadeManager.Instance.LoadScene("QuestScene", FadeTime);
+	}
 }
          
 

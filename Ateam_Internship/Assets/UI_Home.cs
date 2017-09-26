@@ -5,8 +5,11 @@ using UnityEngine;
 public class UI_Home : MonoBehaviour {
 
     public float FadeTime;
-    public void OnClick()
+	[SerializeField] SEManager SE;
+
+	public void OnClick()
     {
-        FadeManager.Instance.LoadScene("HomeScene", FadeTime);
+		SE.PlaySE(4);
+		FadeManager.Instance.LoadScene("HomeScene", FadeTime);
     }
 }

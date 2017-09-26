@@ -11,7 +11,9 @@ public class TapEffect : MonoBehaviour {
     [SerializeField]
     Camera _camera;
 
-    int FCount = 0;
+	[SerializeField] SEManager SE;
+
+	int FCount = 0;
 
     // Use this for initialization
 	void Start () 
@@ -27,6 +29,8 @@ public class TapEffect : MonoBehaviour {
         {
             if ((Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1)))
             {
+				SE.PlaySE(Random.Range(7, 10));
+
                 GameObject GO = Instantiate(tapEffect, 
                     _camera.ScreenToWorldPoint(Input.mousePosition + _camera.transform.forward * 10), Quaternion.Euler(0.0f, 0.0f, 0.0f));
                  

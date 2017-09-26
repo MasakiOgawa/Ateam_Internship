@@ -115,6 +115,11 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 114313714851818812, guid: 353d6c7613b6198448b11fb0ec897ec2,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 224786238500599758, guid: 353d6c7613b6198448b11fb0ec897ec2,
         type: 2}
       propertyPath: m_LocalPosition.x
@@ -230,6 +235,31 @@ Prefab:
       propertyPath: m_ReferenceResolution.y
       value: 1334
       objectReference: {fileID: 0}
+    - target: {fileID: 114313714851818812, guid: 353d6c7613b6198448b11fb0ec897ec2,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114313714851818812, guid: 353d6c7613b6198448b11fb0ec897ec2,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114313714851818812, guid: 353d6c7613b6198448b11fb0ec897ec2,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 126776082}
+    - target: {fileID: 114313714851818812, guid: 353d6c7613b6198448b11fb0ec897ec2,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnClick
+      objectReference: {fileID: 0}
+    - target: {fileID: 114313714851818812, guid: 353d6c7613b6198448b11fb0ec897ec2,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 353d6c7613b6198448b11fb0ec897ec2, type: 2}
   m_IsPrefabParent: 0
@@ -238,6 +268,23 @@ RectTransform:
   m_PrefabParentObject: {fileID: 224786238500599758, guid: 353d6c7613b6198448b11fb0ec897ec2,
     type: 2}
   m_PrefabInternal: {fileID: 126776079}
+--- !u!1 &126776081 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1379528593954712, guid: 353d6c7613b6198448b11fb0ec897ec2,
+    type: 2}
+  m_PrefabInternal: {fileID: 126776079}
+--- !u!114 &126776082
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 126776081}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9912c3ee5765f0b468794354a04ff355, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  FadeTime: 0.5
 --- !u!1001 &219066855
 Prefab:
   m_ObjectHideFlags: 0
@@ -911,6 +958,7 @@ GameObject:
   - component: {fileID: 2121985640}
   - component: {fileID: 2121985639}
   - component: {fileID: 2121985638}
+  - component: {fileID: 2121985642}
   m_Layer: 5
   m_Name: Stage1_Button
   m_TagString: Untagged
@@ -948,7 +996,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7be91f81d8a4994da052fcde4f61d87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FadeTime: 0
+  FadeTime: 0.5
 --- !u!114 &2121985639
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1012,7 +1060,7 @@ MonoBehaviour:
   m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 2100000, guid: fc2315d82e593dd498d805a73279cd80, type: 2}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
@@ -1034,3 +1082,16 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2121985636}
+--- !u!114 &2121985642
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2121985636}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc4324a7ca44e1c45b6e5b00e9cd908e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  FlashColor: 0.6
+  AddColor: 0.005

@@ -24,5 +24,11 @@ public class Title : MonoBehaviour
             //テスト用
             //特に処理なし
         }
+
+        transform.Translate(-0.01f, 0, 0);
+        if (transform.position.x < -11f)
+        {
+            transform.position = new Vector3(11f, 0, 0);
+        }
 	}
 }

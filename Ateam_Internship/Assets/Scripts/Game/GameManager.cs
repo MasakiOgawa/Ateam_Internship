@@ -23,9 +23,12 @@ public class GameManager : MonoBehaviour
 	[SerializeField] private IconManager iconPlayer;		// プレイヤーアイコン
 	[SerializeField] private IconManager iconEnemy;			// エネミーアイコン
     [SerializeField] private UiText uiText;
+    [SerializeField] private UiText2 uiText2;
     [SerializeField] private EffectManager em;
     [SerializeField] int hoge;
     [SerializeField] private GameObject normalObj;
+
+    private int nCnt;
 
     //--------------------------------------------------
     // スタート
@@ -38,7 +41,7 @@ public class GameManager : MonoBehaviour
 		PieceList = GetComponentInChildren<PieceList>();                      // ピースのリストを取得
 		skillChecker = GetComponent<SkillChecker>();                // スキル情報を取得
 
-        //Screen.SetResolution(340, 640, false, 60);
+        nCnt = 0;
     }
 
 
@@ -82,14 +85,14 @@ public class GameManager : MonoBehaviour
                             GameObject gameObj;
                             gameObj = Instantiate(normalObj, new Vector3(0, 0, 0), new Quaternion(0, 0, 0, 0), transform);
                             gameObj.GetComponent<NormalEffect>().SetPoint(new Vector3(-1.4f, 1.65f, 0), new Vector3(-6, 3.3f, 0), new Vector3(0.46f, 1.97f, 0), new Vector3(1.42f, 2.98f, 0), 0);
-                           // Debug.Log("0");
+                           
                         }
                         else if(SkillActive[0] == false)
                         {
                             GameObject gameObj;
                             gameObj = Instantiate(normalObj, new Vector3(0, 0, 0), new Quaternion(0, 0, 0, 0), transform);
                             gameObj.GetComponent<NormalEffect>().SetPoint(new Vector3(-1.4f, 1.65f, 0), new Vector3(-6, 3.3f, 0), new Vector3(0.46f, 1.97f, 0), new Vector3(1.42f, 2.98f, 0), 5);
-                           // Debug.Log("1");
+                           
                         }
 
                         if (SkillActive[1] == true)
@@ -97,14 +100,14 @@ public class GameManager : MonoBehaviour
                             GameObject gameObj;
                             gameObj = Instantiate(normalObj, new Vector3(0, 0, 0), new Quaternion(0, 0, 0, 0), transform);
                             gameObj.GetComponent<NormalEffect>().SetPoint(new Vector3(-1.4f, 1.65f, 0), new Vector3(-6, 3.3f, 0), new Vector3(0.46f, 1.97f, 0), new Vector3(1.42f, 2.98f, 0), 1);
-                           // Debug.Log("2");
+                           
                         }
                         else if (SkillActive[1] == false)
                         {
                             GameObject gameObj;
                             gameObj = Instantiate(normalObj, new Vector3(0, 0, 0), new Quaternion(0, 0, 0, 0), transform);
                             gameObj.GetComponent<NormalEffect>().SetPoint(new Vector3(-1.4f, 1.65f, 0), new Vector3(-6, 3.3f, 0), new Vector3(0.46f, 1.97f, 0), new Vector3(1.42f, 2.98f, 0), 5);
-                           // Debug.Log("3");
+                           
                         }
 
                         if (SkillActive[2] == true)
@@ -119,7 +122,7 @@ public class GameManager : MonoBehaviour
                             GameObject gameObj;
                             gameObj = Instantiate(normalObj, new Vector3(0, 0, 0), new Quaternion(0, 0, 0, 0), transform);
                             gameObj.GetComponent<NormalEffect>().SetPoint(new Vector3(-1.4f, 1.65f, 0), new Vector3(-6, 3.3f, 0), new Vector3(0.46f, 1.97f, 0), new Vector3(1.42f, 2.98f, 0), 5);
-                            //Debug.Log("5");
+                            
                         }
 
                         if (SkillActive[3] == true)
@@ -127,14 +130,14 @@ public class GameManager : MonoBehaviour
                             GameObject gameObj;
                             gameObj = Instantiate(normalObj, new Vector3(0, 0, 0), new Quaternion(0, 0, 0, 0), transform);
                             gameObj.GetComponent<NormalEffect>().SetPoint(new Vector3(-1.4f, 1.65f, 0), new Vector3(-6, 3.3f, 0), new Vector3(0.46f, 1.97f, 0), new Vector3(1.42f, 2.98f, 0), 3);
-                            //Debug.Log("6");
+                            
                         }
                         else if (SkillActive[3] == false)
                         {
                             GameObject gameObj;
                             gameObj = Instantiate(normalObj, new Vector3(0, 0, 0), new Quaternion(0, 0, 0, 0), transform);
                             gameObj.GetComponent<NormalEffect>().SetPoint(new Vector3(-1.4f, 1.65f, 0), new Vector3(-6, 3.3f, 0), new Vector3(0.46f, 1.97f, 0), new Vector3(1.42f, 2.98f, 0), 5);
-                            //Debug.Log("7");
+                           
                         }
 
                         SkillFlag = true;
@@ -148,7 +151,7 @@ public class GameManager : MonoBehaviour
                     }
 
                     // エフェクトが終わったら
-                    if (EffectFlag == true)
+                    if (EffectFlag == true && enemy.GetPartyLife() > 0)
                     {
                         SetGameState(DEFINE.GAME_STATE.ENEMY_TURN);
                         uiText.SetUiNum(1);
@@ -163,10 +166,25 @@ public class GameManager : MonoBehaviour
 				// エネミーの体力が0だったら
 				if (enemy.GetPartyLife() <= 0)
 				{
-					FadeManager.Instance.LoadScene("ResultScene", 0.5f);
-				}
+                    nCnt++;
+                    uiText.SetShowUi(false);
 
-				break;
+                }
+
+                if (nCnt >= 120)
+                {
+                    // 勝利UI
+                    uiText2.SetUiNum(0);
+
+                    if (Input.GetMouseButtonDown(0) /*| Input.GetTouch(0).phase == TouchPhase.Began*/) // タッチにかえる
+                    {
+                        FadeManager.Instance.LoadScene("ResultScene", 0.5f);
+                    }
+                }
+
+               
+
+                break;
 
 			case DEFINE.GAME_STATE.ENEMY_TURN:      // エネミーターン
 
@@ -195,7 +213,7 @@ public class GameManager : MonoBehaviour
                     }
 
                     // エフェクトが終わったら
-                    if(EffectFlag == true)
+                    if(EffectFlag == true && player.GetPartyLife() > 0)
                     {
                         SetGameState(DEFINE.GAME_STATE.PLAYER_TURN);
                         uiText.SetUiNum(0);
@@ -208,7 +226,29 @@ public class GameManager : MonoBehaviour
 
 					
 				}
-				break;
+
+                // プレイヤーの体力が0だったら
+                if (player.GetPartyLife() <= 0)
+                {
+                    nCnt++;
+                    uiText.SetShowUi(false);
+                }
+
+                if (nCnt >= 120)
+                {
+                    // 勝利UI
+                    uiText2.SetUiNum(1);
+
+                    if (Input.GetMouseButtonDown(0) /*| Input.GetTouch(0).phase == TouchPhase.Began*/) // タッチにかえる
+                    {
+                        FadeManager.Instance.LoadScene("ResultScene", 0.5f);
+                    }
+                }
+
+                
+
+
+                break;
 
 			case DEFINE.GAME_STATE.PUZZLE_CLEAN:		// パズルクリーン
 

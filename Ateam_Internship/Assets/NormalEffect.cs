@@ -65,7 +65,6 @@ public class NormalEffect : MonoBehaviour
                 // スキル・エフェクト生成
                 EffectObject.PlayEffect(EffectID, endMarker, new Quaternion(0, 0, 0, 0));
                 bflag = true;
-                Debug.Log(nSkillCnt);
             }
         }
     }

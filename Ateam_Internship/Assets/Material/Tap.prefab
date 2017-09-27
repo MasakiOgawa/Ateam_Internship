@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4836375898451728}
   - component: {fileID: 114227090783441938}
   - component: {fileID: 114537635533963292}
+  - component: {fileID: 114306295776919998}
   m_Layer: 0
   m_Name: Tap
   m_TagString: Untagged
@@ -52,6 +53,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a15a7bab48031345a3c61f4f14cdff4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114306295776919998
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1629772353270424}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8680cb7ebb1fd4a448e666bb4219b9dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114537635533963292
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -65,3 +77,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tapEffect: {fileID: 1001977114276690, guid: 54fcedba25d454649a6543da96c3aee4, type: 2}
   _camera: {fileID: 0}
+  SE: {fileID: 0}

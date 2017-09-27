@@ -29,9 +29,14 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject normalObj;
 	[SerializeField] private SEManager SE;
 
-    private int nCnt;
+	[SerializeField] private ImageRedFlash playerRed;
+
+
+
+	private int nCnt;
 	private int Cnt01;
 	private bool Flag00;
+	private bool flag01;
 
     //--------------------------------------------------
     // スタート
@@ -78,10 +83,11 @@ public class GameManager : MonoBehaviour
 				// パズルが終了していたら
 				if (PuzzleFlag == true)
 				{
+					SkillActive = skillChecker.SkillCheckList(player.GetPlayerParty(), PieceList);
+
 					// スキルが発動したかチェック
-					if(SkillFlag == false)
+					if (SkillFlag == false)
 					{
-						SkillActive = skillChecker.SkillCheckList(player.GetPlayerParty(), PieceList);
                         //Debug.Log(SkillActive[0] );
 
                         if(SkillActive[0] == true)
@@ -150,8 +156,9 @@ public class GameManager : MonoBehaviour
 					// 攻撃フラグオンだったら
 					if(AttackFlag == false)
 					{
-						player.PlayerAttack();
+						player.PlayerAttack(SkillActive);
 						AttackFlag = true;
+						//enemyRed.SetRedFlash(true);
                     }
 
                     // エフェクトが終わったら
@@ -227,6 +234,8 @@ public class GameManager : MonoBehaviour
 					if (AttackFlag == false)
 					{
 						enemy.EnemyAttack();
+						playerRed.SetRedFlash(true);
+
 						AttackFlag = true;
                         EffectFlag = true;
                     }
@@ -259,9 +268,15 @@ public class GameManager : MonoBehaviour
                     // 勝利UI
                     uiText2.SetUiNum(1);
 
-                    if (Input.GetMouseButtonDown(0) /*| Input.GetTouch(0).phase == TouchPhase.Began*/) // タッチにかえる
+					if (flag01== false)
+					{
+						SE.PlaySE(16);
+						flag01 = true;
+					}
+
+					if (Input.GetMouseButtonDown(0) /*| Input.GetTouch(0).phase == TouchPhase.Began*/) // タッチにかえる
                     {
-                        FadeManager.Instance.LoadScene("ResultScene", 0.5f);
+                        FadeManager.Instance.LoadScene("HomeScene", 0.5f);
                     }
                 }
 

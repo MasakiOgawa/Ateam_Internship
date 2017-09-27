@@ -23,7 +23,9 @@ public class NormalEffect : MonoBehaviour
     private GameManager gameManager;
 	private SEManager SE;
 
-    void Awake()
+	private ImageRedFlash enemyRed;
+
+	void Awake()
     {
        
     }
@@ -42,6 +44,8 @@ public class NormalEffect : MonoBehaviour
         EffectObject = GameObject.Find("EffectManager").GetComponent<EffectManager>();
 
 		SE = GameObject.Find("SEManager").GetComponent<SEManager>();
+
+		enemyRed = GameObject.Find("Enemy_Icon").GetComponentInChildren<ImageRedFlash>();
     }
     void Update()
     {
@@ -67,6 +71,7 @@ public class NormalEffect : MonoBehaviour
             {
                 // スキル・エフェクト生成
                 EffectObject.PlayEffect(EffectID, new Vector3(endMarker.x, endMarker.y, 10), new Quaternion(0, 0, 0, 0));
+				enemyRed.SetRedFlash(true);
 				SE.PlaySE(14);
 				SE.PlaySE(0);
                 bflag = true;

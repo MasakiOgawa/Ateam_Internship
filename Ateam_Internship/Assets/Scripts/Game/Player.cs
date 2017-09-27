@@ -15,10 +15,10 @@ public class Player : MonoBehaviour
 	void Start()
 	{
 		PlayerParty = new DEFINE.Party(
-			new DEFINE.Character(100, 20, DEFINE.PUZZLE_PIECE_SUIT.SPADE, DEFINE.PUZZLE_PIECE_SUIT.SPADE),			// リーダー
-			new DEFINE.Character(100, 20, DEFINE.PUZZLE_PIECE_SUIT.SPADE, DEFINE.PUZZLE_PIECE_SUIT.SPADE),      // キャラ1(アイコン 左)
-			new DEFINE.Character(100, 20, DEFINE.PUZZLE_PIECE_SUIT.SPADE, DEFINE.PUZZLE_PIECE_SUIT.SPADE),			// キャラ2(アイコン 中)
-			new DEFINE.Character(100, 20, DEFINE.PUZZLE_PIECE_SUIT.SPADE, DEFINE.PUZZLE_PIECE_SUIT.SPADE));			// キャラ3(アイコン 右)
+			new DEFINE.Character(100, 10, DEFINE.PUZZLE_PIECE_SUIT.SPADE, DEFINE.PUZZLE_PIECE_SUIT.SPADE),			// リーダー
+			new DEFINE.Character(100, 10, DEFINE.PUZZLE_PIECE_SUIT.SPADE, DEFINE.PUZZLE_PIECE_SUIT.DIAMOND),      // キャラ1(アイコン 左)
+			new DEFINE.Character(100, 10, DEFINE.PUZZLE_PIECE_SUIT.DIAMOND, DEFINE.PUZZLE_PIECE_SUIT.HEART),			// キャラ2(アイコン 中)
+			new DEFINE.Character(100, 10, DEFINE.PUZZLE_PIECE_SUIT.HEART, DEFINE.PUZZLE_PIECE_SUIT.CLUB));			// キャラ3(アイコン 右)
 
 		// パーティの総ステータスを設定
 		PartyLife = PlayerParty.Chara_0.Life + PlayerParty.Chara_1.Life + PlayerParty.Chara_2.Life + PlayerParty.Chara_3.Life;
@@ -55,11 +55,31 @@ public class Player : MonoBehaviour
 	}
 
 	// プレイヤーの攻撃
-	public void PlayerAttack()
+	public void PlayerAttack(bool[] SkillActive)
 	{
 		// 消した個数を取得
 		int PieceNum = pieceList.GetListCount();
-		
+
+		if (SkillActive[0] == true)
+		{
+			PieceNum += 3;
+		}
+
+		if (SkillActive[1] == true)
+		{
+			PieceNum += 3;
+		}
+
+		if (SkillActive[2] == true)
+		{
+			PieceNum += 3;
+		}
+
+		if (SkillActive[3] == true)
+		{
+			PieceNum += 3;
+		}
+
 		// 攻撃
 		enemy.SubPartyLife(PartyAttack * (1 + (PieceNum * 0.2f)));
 	}

@@ -3228,7 +3228,7 @@ ParticleSystem:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100002}
   serializedVersion: 5
-  lengthInSec: 0.5
+  lengthInSec: 0.3
   simulationSpeed: 1
   looping: 0
   prewarm: 0
@@ -3285,7 +3285,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 5
+      scalar: 3
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -6263,7 +6263,7 @@ ParticleSystem:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100004}
   serializedVersion: 5
-  lengthInSec: 0.5
+  lengthInSec: 0.3
   simulationSpeed: 1
   looping: 0
   prewarm: 0

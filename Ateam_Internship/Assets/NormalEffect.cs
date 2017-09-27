@@ -21,6 +21,7 @@ public class NormalEffect : MonoBehaviour
     private bool bflag;
 
     private GameManager gameManager;
+	private SEManager SE;
 
     void Awake()
     {
@@ -39,6 +40,8 @@ public class NormalEffect : MonoBehaviour
         journeyLength = Vector3.Distance(startMarker, endMarker);
 
         EffectObject = GameObject.Find("EffectManager").GetComponent<EffectManager>();
+
+		SE = GameObject.Find("SEManager").GetComponent<SEManager>();
     }
     void Update()
     {
@@ -50,7 +53,7 @@ public class NormalEffect : MonoBehaviour
 
 
         // 終点まで来たら
-        if (transform.position.x >= endMarker.x | transform.position.y >= endMarker.y)
+        if (/*transform.position.x >= endMarker.x |*/ transform.position.y >= endMarker.y)
         {
             if(nID == 3)
             {
@@ -63,7 +66,9 @@ public class NormalEffect : MonoBehaviour
             if (bflag == false)
             {
                 // スキル・エフェクト生成
-                EffectObject.PlayEffect(EffectID, endMarker, new Quaternion(0, 0, 0, 0));
+                EffectObject.PlayEffect(EffectID, new Vector3(endMarker.x, endMarker.y, 10), new Quaternion(0, 0, 0, 0));
+				SE.PlaySE(14);
+				SE.PlaySE(0);
                 bflag = true;
             }
         }

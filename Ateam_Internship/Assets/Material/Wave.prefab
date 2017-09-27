@@ -140,6 +140,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tapEffect: {fileID: 1001977114276690}
   _camera: {fileID: 20282333947587388, guid: be77bfe3d4c65d746ac4ec9136d0ae9d, type: 2}
+  SE: {fileID: 0}
 --- !u!114 &114393680380712642
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -153,6 +154,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tapEffect: {fileID: 1130537304403222}
   _camera: {fileID: 20282333947587388, guid: be77bfe3d4c65d746ac4ec9136d0ae9d, type: 2}
+  SE: {fileID: 0}
 --- !u!114 &114882570253988520
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -6569,8 +6571,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 794290123
-  m_SortingLayer: 6
+  m_SortingLayerID: -475830137
+  m_SortingLayer: 8
   m_SortingOrder: 0
   m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

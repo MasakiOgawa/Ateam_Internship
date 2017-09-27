@@ -65,6 +65,9 @@ TagManager:
   - name: line
     uniqueID: 479228601
     locked: 0
+  - name: TouchEffect
+    uniqueID: 3819137159
+    locked: 0
   - name: Effect
     uniqueID: 794290123
     locked: 0

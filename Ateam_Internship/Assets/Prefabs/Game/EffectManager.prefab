@@ -46,7 +46,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1991228121163058}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 54d4f01bfb24fd34cb3cc89a60c9d9c6, type: 3}
   m_Name: 
@@ -57,4 +57,4 @@ MonoBehaviour:
   - {fileID: 100008, guid: c459dc8cf2a04624eb4d91f0b9ef9daa, type: 2}
   - {fileID: 100000, guid: 1502d27b5b1167e4c8b8c85d7546b34f, type: 2}
   - {fileID: 100004, guid: 409fabb6ee48d8f49adc485b8c5d693f, type: 2}
-  - {fileID: 1616342196477850, guid: 68d4d8dd5fce45246a221eec13e596da, type: 2}
+  - {fileID: 100004, guid: d58b569be32ed6c4dbd3a502433f2eff, type: 2}

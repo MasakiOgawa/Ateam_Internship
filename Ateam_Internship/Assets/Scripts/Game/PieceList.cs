@@ -19,6 +19,7 @@ public class PieceList : MonoBehaviour
 	private GameManager gameManager;		// ゲームマネージャー情報
 
     [SerializeField] private UiText uiText;
+	[SerializeField] private SEManager SE;
 
     // Use this for initialization
     void Start()
@@ -84,7 +85,9 @@ public class PieceList : MonoBehaviour
                     //削除対象のオブジェクトを格納
                     PushToList(hitObj);
 
-                }
+
+					SE.PlaySE(12);
+				}
 			}
 		}
 	}
@@ -136,6 +139,8 @@ public class PieceList : MonoBehaviour
                                     //削除対象のオブジェクトを格納
                                     endPiece = hitObj;
                                     PushToList(hitObj);
+
+									SE.PlaySE(12);
                                 }
                             }
 						}
@@ -189,6 +194,8 @@ public class PieceList : MonoBehaviour
 
 			// 塗った個数を保存
 			nRemoveCnt = removablePieceList.Count;
+
+			SE.PlaySE(13);
 		}
         else
         {

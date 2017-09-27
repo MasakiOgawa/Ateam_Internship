@@ -13,9 +13,11 @@ public class UiText : MonoBehaviour {
     private bool bFirstTime;
     private int nCnt;
     private int nSetCnt;
+	private bool se;
 
     [SerializeField] private Sprite playerTurn;     // プレイヤーターン
     [SerializeField] private Sprite enemyTurn;      // エネミーターン
+	[SerializeField] private SEManager SE;
 
     // Use this for initialization
     void Start ()
@@ -58,12 +60,18 @@ public class UiText : MonoBehaviour {
             {
                 fAlpha += 0.03f;
             }
-
-            if (fAlpha >= 1.0f)
+			
+			if (fAlpha >= 1.0f)
             {
                 fAlpha = 1.0f;
                 nCnt++;
                 bAlphaOn = true;
+				if(se == false)
+				{
+					SE.PlaySE(16);
+					se = true;
+				}
+				
             }
 
             if (nCnt >= 30)
@@ -76,7 +84,8 @@ public class UiText : MonoBehaviour {
                     nCnt = 0;
                     bAlphaOn = false;
                     bFirstTime = false;
-                }
+					se = false;
+				}
             }
         }
 
@@ -107,5 +116,11 @@ public class UiText : MonoBehaviour {
     public void SetShowUi(bool setshowUi)
     {
         bFirstTime = setshowUi;
+
     }
+
+	public void SetSEFlag(bool flag)
+	{
+		se = flag;
+	}
 }

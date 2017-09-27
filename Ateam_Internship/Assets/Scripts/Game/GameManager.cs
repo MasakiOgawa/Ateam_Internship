@@ -27,8 +27,11 @@ public class GameManager : MonoBehaviour
     [SerializeField] private EffectManager em;
     [SerializeField] int hoge;
     [SerializeField] private GameObject normalObj;
+	[SerializeField] private SEManager SE;
 
     private int nCnt;
+	private int Cnt01;
+	private bool Flag00;
 
     //--------------------------------------------------
     // スタート
@@ -42,6 +45,7 @@ public class GameManager : MonoBehaviour
 		skillChecker = GetComponent<SkillChecker>();                // スキル情報を取得
 
         nCnt = 0;
+		SE.PlaySE(1);
     }
 
 
@@ -99,14 +103,14 @@ public class GameManager : MonoBehaviour
                         {
                             GameObject gameObj;
                             gameObj = Instantiate(normalObj, new Vector3(0, 0, 0), new Quaternion(0, 0, 0, 0), transform);
-                            gameObj.GetComponent<NormalEffect>().SetPoint(new Vector3(-1.4f, 1.65f, 0), new Vector3(-6, 3.3f, 0), new Vector3(0.46f, 1.97f, 0), new Vector3(1.42f, 2.98f, 0), 1);
+                            gameObj.GetComponent<NormalEffect>().SetPoint(new Vector3(-0.03f, 1.08f, 0), new Vector3(-2.9f, 2.7f, 0), new Vector3(0.77f, 1.45f, 0), new Vector3(1.42f, 2.97f, 0), 1);
                            
                         }
                         else if (SkillActive[1] == false)
                         {
                             GameObject gameObj;
                             gameObj = Instantiate(normalObj, new Vector3(0, 0, 0), new Quaternion(0, 0, 0, 0), transform);
-                            gameObj.GetComponent<NormalEffect>().SetPoint(new Vector3(-1.4f, 1.65f, 0), new Vector3(-6, 3.3f, 0), new Vector3(0.46f, 1.97f, 0), new Vector3(1.42f, 2.98f, 0), 5);
+                            gameObj.GetComponent<NormalEffect>().SetPoint(new Vector3(-0.03f, 1.08f, 0), new Vector3(-2.9f, 2.7f, 0), new Vector3(0.77f, 1.45f, 0), new Vector3(1.42f, 2.97f, 0),	 5);
                            
                         }
 
@@ -114,31 +118,31 @@ public class GameManager : MonoBehaviour
                         {
                             GameObject gameObj;
                             gameObj = Instantiate(normalObj, new Vector3(0, 0, 0), new Quaternion(0, 0, 0, 0), transform);
-                            gameObj.GetComponent<NormalEffect>().SetPoint(new Vector3(-1.4f, 1.65f, 0), new Vector3(-6, 3.3f, 0), new Vector3(0.46f, 1.97f, 0), new Vector3(1.42f, 2.98f, 0), 2);
+                            gameObj.GetComponent<NormalEffect>().SetPoint(new Vector3(0.79f, 1.08f, 0), new Vector3(0.76f, 2.7f, 0), new Vector3(1.68f, 1.67f, 0), new Vector3(1.42f, 2.98f, 0), 2);
                             //Debug.Log("4");
                         }
                         else if (SkillActive[2] == false)
                         {
                             GameObject gameObj;
                             gameObj = Instantiate(normalObj, new Vector3(0, 0, 0), new Quaternion(0, 0, 0, 0), transform);
-                            gameObj.GetComponent<NormalEffect>().SetPoint(new Vector3(-1.4f, 1.65f, 0), new Vector3(-6, 3.3f, 0), new Vector3(0.46f, 1.97f, 0), new Vector3(1.42f, 2.98f, 0), 5);
-                            
-                        }
+                            gameObj.GetComponent<NormalEffect>().SetPoint(new Vector3(0.79f, 1.08f, 0), new Vector3(0.76f, 2.7f, 0), new Vector3(1.68f, 1.67f, 0), new Vector3(1.42f, 2.98f, 0), 5	);
+
+						}
 
                         if (SkillActive[3] == true)
                         {
                             GameObject gameObj;
                             gameObj = Instantiate(normalObj, new Vector3(0, 0, 0), new Quaternion(0, 0, 0, 0), transform);
-                            gameObj.GetComponent<NormalEffect>().SetPoint(new Vector3(-1.4f, 1.65f, 0), new Vector3(-6, 3.3f, 0), new Vector3(0.46f, 1.97f, 0), new Vector3(1.42f, 2.98f, 0), 3);
+                            gameObj.GetComponent<NormalEffect>().SetPoint(new Vector3(1.67f, 1.08f, 0), new Vector3(0.52f, 1.92f, 0), new Vector3(2.36f, 2.34f, 0), new Vector3(1.42f, 2.9f, 0), 3);
                             
                         }
                         else if (SkillActive[3] == false)
                         {
                             GameObject gameObj;
                             gameObj = Instantiate(normalObj, new Vector3(0, 0, 0), new Quaternion(0, 0, 0, 0), transform);
-                            gameObj.GetComponent<NormalEffect>().SetPoint(new Vector3(-1.4f, 1.65f, 0), new Vector3(-6, 3.3f, 0), new Vector3(0.46f, 1.97f, 0), new Vector3(1.42f, 2.98f, 0), 5);
-                           
-                        }
+							gameObj.GetComponent<NormalEffect>().SetPoint(new Vector3(1.67f, 1.08f, 0), new Vector3(0.52f, 1.92f, 0), new Vector3(2.36f, 2.34f, 0), new Vector3(1.42f, 2.9f, 0), 5);
+
+						}
 
                         SkillFlag = true;
 					}
@@ -160,7 +164,8 @@ public class GameManager : MonoBehaviour
                         SkillFlag = false;
                         AttackFlag = false;
                         EffectFlag = false;
-                    }
+						
+					}
                 }
 
 				// エネミーの体力が0だったら
@@ -176,7 +181,15 @@ public class GameManager : MonoBehaviour
                     // 勝利UI
                     uiText2.SetUiNum(0);
 
-                    if (Input.GetMouseButtonDown(0) /*| Input.GetTouch(0).phase == TouchPhase.Began*/) // タッチにかえる
+					if(Flag00 == false)
+					{
+						SE.PlaySE(5);
+						SE.PlaySE(3);
+						//SE.PlaySE(16);
+						Flag00 = true;
+					}
+
+					if (Input.GetMouseButtonDown(0) /*| Input.GetTouch(0).phase == TouchPhase.Began*/) // タッチにかえる
                     {
                         FadeManager.Instance.LoadScene("ResultScene", 0.5f);
                     }
@@ -201,6 +214,12 @@ public class GameManager : MonoBehaviour
 					if (SkillFlag == false)
 					{
 						SkillActive = skillChecker.SkillCheckList(enemy.GetEnemyParty(), PieceList);
+
+						em.PlayEffect(4, new Vector3(-1.38f, 1.56f, 0), new Quaternion(0, 0, 0, 0));
+
+						SE.PlaySE(15);
+						SE.PlaySE(2);
+
 						SkillFlag = true;
 					}
 
@@ -222,7 +241,8 @@ public class GameManager : MonoBehaviour
                         SkillFlag = false;
                         AttackFlag = false;
                         EffectFlag = false;
-                    }
+						
+					}
 
 					
 				}
